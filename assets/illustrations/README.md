@@ -1,10 +1,11 @@
-# Illustration assets
+# Illustration assets (temporary runtime folder)
 
-Place illustration files obtained in accordance with the official いらすとや terms in this folder.
+This directory is reserved for temporary illustration files used during a GitHub Actions run.
 
-The filenames must exactly match the `file` values in `content/illustration-map.json`.
-Supported image formats for the video workflow will be PNG, JPG, or WebP.
+**Do not commit or publish downloaded いらすとや image files in this public repository.** The artwork must not be redistributed as a standalone asset pack.
 
-Do not hotlink or bulk-scrape the site. Keep each video's use within the applicable license limits (including thumbnail usage), and retain any required attribution.
+The workflow should obtain only the specific illustrations needed for a finished video, use them during that run, and keep them out of Git commits and uploaded source-code artifacts. Use images only in accordance with the current official terms:
+- https://www.irasutoya.com/p/terms.html
+- https://www.irasutoya.com/p/faq.html
 
-The selection script only chooses files that already exist locally; it does not download images from the internet.
+The selector reads local files from this directory. It does not itself download images.
