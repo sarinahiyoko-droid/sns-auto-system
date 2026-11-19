@@ -1,4 +1,5 @@
 name: Build Complete Japanese Trivia Video
+# End-to-end test after narration-length adjustment
 
 on:
   workflow_dispatch:
