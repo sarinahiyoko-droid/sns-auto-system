@@ -144,6 +144,23 @@ jobs:
           }
           """
 
+          illustration_map = json.loads(
+              Path("content/illustration-map.json").read_text(encoding="utf-8")
+          )
+          available_keywords = sorted({
+              keyword
+              for item in illustration_map
+              for keyword in item.get("keywords", [])
+          })
+          prompt += (
+              "\\n\\n【今回利用できる素材キーワード】\\n"
+              + "、".join(available_keywords)
+              + "\\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
+              + "\\n今回のテーマはジャイアントパンダの白黒模様・保護色・コミュニケーションに限定してください。"
+              + "\\n研究結果は確定した事実と言い切らず「研究では〜と考えられている」と説明してください。"
+              + "\\n参考情報源には次の論文を必ず記載してください：Caro et al. (2017), Why is the giant panda black and white?, Behavioral Ecology, https://doi.org/10.1093/beheco/arx008"
+          )
+
           url = (
               "https://generativelanguage.googleapis.com/"
               "v1beta/models/gemini-3.5-flash-lite:generateContent"
@@ -192,6 +209,17 @@ jobs:
           if len(script["scenes"]) != 4:
               raise ValueError("Exactly 4 scenes are required.")
 
+          available_keyword_set = set(available_keywords)
+          sources = script.get("sources", [])
+          if not sources or not any(
+              str(source.get("url", "")).startswith("https://")
+              for source in sources
+          ):
+              raise ValueError("At least one HTTPS source URL is required.")
+
+          if len(script["narration"]) > 125:
+              raise ValueError("Narration is too long for a 20-second short.")
+
           expected_times = [
               (0, 5),
               (5, 10),
@@ -223,6 +251,15 @@ jobs:
 
               if not scene["illustration_keywords"]:
                   raise ValueError("Illustration keywords are empty.")
+
+              if len(scene["illustration_keywords"]) > 2:
+                  raise ValueError("Use no more than 2 illustration keywords per scene.")
+
+              if not any(
+                  keyword in available_keyword_set
+                  for keyword in scene["illustration_keywords"]
+              ):
+                  raise ValueError("Each scene must match at least one curated Irasutoya keyword.")
 
           if not script["narration"].strip():
               raise ValueError("Narration is empty.")
