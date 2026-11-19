@@ -122,12 +122,12 @@ def main():
     args, filters = [], []
     for i, (path, duration) in enumerate(zip(clips, durations)):
         frames = max(1, round(duration * FPS))
-        args += ["-loop", "1", "-t", f"{duration:.3f}", "-i", str(path)]
+        args += ["-loop", "1", "-framerate", str(FPS), "-t", f"{duration:.3f}", "-i", str(path)]
         # Gentle zoom; each scene's duration follows the script's start/end values.
         filters.append(
             f"[{i}:v]zoompan=z='min(zoom+0.00035,1.05)':"
             f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
-            f"d={frames}:s={W}x{H}:fps={FPS},setsar=1[v{i}]"
+            f"d=1:s={W}x{H}:fps={FPS},setsar=1[v{i}]"
         )
 
     filters.append("".join(f"[v{i}]" for i in range(len(clips))) +
