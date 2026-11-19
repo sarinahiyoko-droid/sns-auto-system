@@ -164,15 +164,15 @@ jobs:
           )[str(weekday)]
 
           prompt += (
-              "\\n\\n【今回利用できる素材キーワード】\\n"
+              "\n\n【今回利用できる素材キーワード】\n"
               + "、".join(available_keywords)
-              + "\\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
-              + "\\n【今回の固定テーマ】" + topic_plan["topic"]
-              + "\\n【確認済みの事実】" + topic_plan["fact"]
-              + "\\nこの事実から外れた推測や数字を追加しないでください。"
-              + "\\n【必ず記載する参考情報源】" + topic_plan["source"]["title"]
+              + "\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
+              + "\n【今回の固定テーマ】" + topic_plan["topic"]
+              + "\n【確認済みの事実】" + topic_plan["fact"]
+              + "\nこの事実から外れた推測や数字を追加しないでください。"
+              + "\n【必ず記載する参考情報源】" + topic_plan["source"]["title"]
               + " " + topic_plan["source"]["url"]
-              + "\\n週5本のシリーズとして、同じ結論や導入文を繰り返さないでください。"
+              + "\n週5本のシリーズとして、同じ結論や導入文を繰り返さないでください。"
           )
 
           url = (
