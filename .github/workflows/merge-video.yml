@@ -1,0 +1,55 @@
+
+name: Merge Video and Audio
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  merge:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Download generated video
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-video
+          path: input/video
+
+      - name: Download generated audio
+        uses: actions/download-artifact@v4
+        with:
+          name: japanese-audio
+          path: input/audio
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Merge video and audio
+        run: |
+          mkdir -p output
+
+          ffmpeg -y \
+            -i input/video/video.mp4 \
+            -i input/audio/audio.wav \
+            -map 0:v:0 \
+            -map 1:a:0 \
+            -c:v copy \
+            -c:a aac \
+            -b:a 192k \
+            -shortest \
+            -movflags +faststart \
+            output/final-video.mp4
+
+      - name: Save final video
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-video
+          path: output/final-video.mp4
+          retention-days: 7
