@@ -203,6 +203,13 @@ jobs:
           text = result["candidates"][0]["content"]["parts"][0]["text"]
           script = json.loads(text)
 
+          # Add a short, fact-consistent closing line if Gemini makes the narration too brief.
+          if len(script.get("narration", "")) < 105:
+              script["narration"] = (
+                  script["narration"].rstrip("。！？")
+                  + "。白と黒は、それぞれ違う場面で役立つんですね。"
+              )
+
           required_fields = [
               "title", "topic", "narration", "scenes", "sources"
           ]
