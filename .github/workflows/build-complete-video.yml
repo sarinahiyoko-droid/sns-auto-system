@@ -38,6 +38,9 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 15
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download video artifact
         uses: actions/download-artifact@v4
         with:
