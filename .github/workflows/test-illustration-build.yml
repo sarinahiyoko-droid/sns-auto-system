@@ -6,6 +6,7 @@ on:
       - ".github/workflows/test-illustration-build.yml"
       - "scripts/render_video.py"
       - "content/script.json"
+      - ".github/workflows/*.yml"
   workflow_dispatch:
 
 permissions:
@@ -28,10 +29,21 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg fonts-noto-cjk
           python -m pip install --upgrade pip
-          python -m pip install Pillow
+          python -m pip install Pillow PyYAML
 
       - name: Validate script JSON
         run: python -m json.tool content/script.json > /dev/null
+
+      - name: Validate workflow YAML files
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+          for path in sorted(Path(".github/workflows").glob("*.yml")):
+              with path.open(encoding="utf-8") as stream:
+                  yaml.safe_load(stream)
+              print(f"Valid YAML: {path}")
+          PY
 
       - name: Create temporary renderer test images
         run: |
