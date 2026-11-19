@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: video-renderer-smoke-test
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-22.04
@@ -52,7 +56,11 @@ jobs:
       - name: Verify generated MP4
         run: |
           test -s output/video.mp4
-          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 output/video.mp4
+          DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 output/video.mp4)
+          SIZE=$(stat -c%s output/video.mp4)
+          echo "Duration: $DURATION seconds"
+          echo "Size: $SIZE bytes"
+          awk -v d="$DURATION" 'BEGIN { if (d < 19 || d > 21) exit 1 }'
 
       - name: Upload renderer test video
         uses: actions/upload-artifact@v4
