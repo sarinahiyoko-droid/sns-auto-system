@@ -1,14 +1,6 @@
 name: Test Video Renderer
 
 on:
-  push:
-    paths:
-      - ".github/workflows/test-illustration-build.yml"
-      - "scripts/render_video.py"
-      - "scripts/download_illustrations.py"
-      - "content/illustration-map.json"
-      - "content/script.json"
-      - ".github/workflows/*.yml"
   workflow_dispatch:
 
 permissions:
