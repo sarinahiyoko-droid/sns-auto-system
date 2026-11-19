@@ -1,61 +1,61 @@
 {
-  "title": "パンダの白黒模様の謎",
-  "topic": "ジャイアントパンダの白黒模様・保護色・コミュニケーション",
-  "narration": "パンダの白と黒の模様、実は理由があるって知ってた？研究では、白い部分は雪景色に、黒い部分は森の影に紛れるためと考えられているんだ。じゃあ、目の周りの黒い模様は何のため？それは、仲間同士のコミュニケーションに使われているかもしれないそうだよ。",
+  "title": "母親とのサイズ差が衝撃！パンダの赤ちゃんの秘密",
+  "topic": "生まれたばかりのパンダの驚くほど小さな体",
+  "narration": "生まれたばかりのパンダって、どれくらい小さいか知っていますか？実は、大人の母親の体重に対して、およそ九百分の一しかないんです。生まれた直後は目が見えず、毛もほとんどありません。あんなに大きな体になるのに、最初はびっくりするほど小っちゃいんですね。",
   "scenes": [
     {
-      "text": "パンダの模様の謎",
+      "text": "生まれたパンダはどれくらい小さい？",
       "start": 0,
       "end": 5,
       "illustration_keywords": [
-        "パンダ",
-        "クエスチョンマーク"
+        "クエスチョンマーク",
+        "パンダ"
       ],
-      "visual_note": "パンダのイラストの横に大きなクエスチョンマークを表示する",
-      "highlight": "理由",
+      "visual_note": "疑問符の近くに小さなパンダのイラストを配置する",
+      "highlight": "どれくらい小さい",
       "motion": "クエスチョンマークが揺れる"
     },
     {
-      "text": "雪と森に隠れるため？",
+      "text": "母親の体重のなんと約900分の1！",
       "start": 5,
       "end": 10,
       "illustration_keywords": [
-        "雪山",
-        "森"
+        "悩む人",
+        "動物園"
       ],
-      "visual_note": "雪山と森のイラストを背景にパンダを表示する",
-      "highlight": "保護色",
-      "motion": "ゆっくり移動"
-    },
-    {
-      "text": "目の周りは何のため？",
-      "start": 10,
-      "end": 15,
-      "illustration_keywords": [
-        "双眼鏡",
-        "疑問"
-      ],
-      "visual_note": "双眼鏡を持った人がパンダを観察しているイラストを表示する",
-      "highlight": "目の周り",
+      "visual_note": "驚いている人のイラストの横にパンダを表示する",
+      "highlight": "約900分の1",
       "motion": "拡大"
     },
     {
-      "text": "仲間との合図だった！",
+      "text": "生まれた直後は目が見えず毛もない",
+      "start": 10,
+      "end": 15,
+      "illustration_keywords": [
+        "探す人",
+        "動物園"
+      ],
+      "visual_note": "じっと見つめる人のイラストを表示する",
+      "highlight": "毛もほとんどない",
+      "motion": "左から登場"
+    },
+    {
+      "text": "最初はびっくりするほど小っちゃい！",
       "start": 15,
       "end": 20,
       "illustration_keywords": [
-        "動物園",
-        "パンダ"
+        "パンダ",
+        "疑問"
       ],
-      "visual_note": "楽しそうなパンダのイラストを表示する",
-      "highlight": "合図",
-      "motion": "左から登場"
+      "visual_note": "驚く表情のパンダのイラストを表示する",
+      "highlight": "小っちゃい",
+      "motion": "ゆっくり移動"
     }
   ],
   "sources": [
     {
-      "title": "Caro et al. (2017), Why is the giant panda black and white?, Behavioral Ecology",
-      "url": "https://doi.org/10.1093/beheco/arx008"
+      "title": "WWF, Giant Pandas",
+      "url": "https://www.worldwildlife.org/species/giant-panda/"
     }
   ]
 }
