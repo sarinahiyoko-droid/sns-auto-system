@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: gemini-tts-smoke-test
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-22.04
@@ -19,9 +23,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install FFmpeg
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg
-
       - name: Generate male Japanese narration
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -29,8 +30,17 @@ jobs:
 
       - name: Validate audio
         run: |
-          test -s output/audio.wav
-          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 output/audio.wav
+          python - <<'PY'
+          import wave
+          from pathlib import Path
+          path = Path("output/audio.wav")
+          assert path.exists() and path.stat().st_size > 1000
+          with wave.open(str(path), "rb") as audio:
+              duration = audio.getnframes() / audio.getframerate()
+              print(f"Duration: {duration:.2f} seconds")
+              print(f"Size: {path.stat().st_size} bytes")
+              assert duration > 1
+          PY
 
       - name: Upload TTS test audio
         uses: actions/upload-artifact@v4
