@@ -35,7 +35,9 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install Pillow
 
-      - name: Download curated official Irasutoya illustrations
+      - name: Download matching Irasutoya illustrations
+        env:
+          ALLOW_LIVE_IRASUTOYA_SEARCH: "true"
         run: python scripts/download_illustrations.py
 
       - name: Generate illustrated vertical video
