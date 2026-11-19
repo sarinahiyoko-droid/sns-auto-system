@@ -31,23 +31,33 @@ jobs:
           VIDEO_RUN_ID_INPUT: ${{ inputs.video_run_id }}
           AUDIO_RUN_ID_INPUT: ${{ inputs.audio_run_id }}
         run: |
+          current_sha="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_REF_NAME}" --jq .sha)"
           video_id="$VIDEO_RUN_ID_INPUT"
           audio_id="$AUDIO_RUN_ID_INPUT"
 
           if [ -z "$video_id" ]; then
-            video_id="$(gh run list --workflow "Generate Video" --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')"
+            video_id="$(gh run list --workflow "Generate Video" --branch "$GITHUB_REF_NAME" --status success --limit 20 --json databaseId,headSha --jq --arg sha "$current_sha" '[.[] | select(.headSha == $sha)][0].databaseId // empty')"
           fi
 
           if [ -z "$audio_id" ]; then
-            audio_id="$(gh run list --workflow "Generate Japanese Audio" --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')"
+            audio_id="$(gh run list --workflow "Generate Japanese Audio" --branch "$GITHUB_REF_NAME" --status success --limit 20 --json databaseId,headSha --jq --arg sha "$current_sha" '[.[] | select(.headSha == $sha)][0].databaseId // empty')"
           fi
 
           if [ -z "$video_id" ] || [ -z "$audio_id" ]; then
-            echo "A successful video or audio run could not be found."
-            echo "Run Generate Video and Generate Japanese Audio first."
+            echo "No successful video/audio artifacts were found for the current code version."
+            echo "Run Generate Video and Generate Japanese Audio again, then retry."
             exit 1
           fi
 
+          video_sha="$(gh run view "$video_id" --json headSha --jq .headSha)"
+          audio_sha="$(gh run view "$audio_id" --json headSha --jq .headSha)"
+          if [ "$video_sha" != "$current_sha" ] || [ "$audio_sha" != "$current_sha" ]; then
+            echo "The selected artifacts were generated from a different code version."
+            echo "Regenerate both video and audio from the current repository version."
+            exit 1
+          fi
+
+          echo "Using current code version: $current_sha"
           echo "Using video run: $video_id"
           echo "Using audio run: $audio_id"
           echo "video_run_id=$video_id" >> "$GITHUB_OUTPUT"
