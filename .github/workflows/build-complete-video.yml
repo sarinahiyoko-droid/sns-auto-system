@@ -20,12 +20,16 @@ jobs:
     name: Generate Japanese narration
     needs: generate-script
     uses: ./.github/workflows/generate-audio.yml
+    with:
+      use_generated_script: true
     secrets: inherit
 
   generate-video:
     name: Generate illustrated video
     needs: generate-script
     uses: ./.github/workflows/generate-video.yml
+    with:
+      use_generated_script: true
     secrets: inherit
 
   merge:
