@@ -10,7 +10,7 @@ MAX_ILLUSTRATIONS_PER_VIDEO = 20
 
 
 def normalize(value):
-    return re.sub(r"\\s+", "", str(value)).casefold()
+    return re.sub(r"\s+", "", str(value)).casefold()
 
 
 def main():
@@ -57,6 +57,7 @@ def main():
                     "file": str(image_path),
                     "name": item.get("name", Path(filename).stem),
                     "score": score,
+                    "source_page": item.get("source_page", ""),
                 })
 
         ranked.sort(key=lambda item: (-item["score"], item["name"]))
@@ -91,16 +92,12 @@ def main():
     )
 
     missing = [
-        {
-            "scene": item["scene"],
-            "keywords": item["illustration_keywords"],
-        }
-        for item in results
-        if not item["selected_illustrations"]
+        {"scene": item["scene"], "keywords": item["illustration_keywords"]}
+        for item in results if not item["selected_illustrations"]
     ]
 
     print(f"Illustration selection complete: {len(selected_files)} unique files.")
-    print(f"Scenes without a matching local image: {len(missing)}")
+    print(f"Scenes without a matching downloaded image: {len(missing)}")
     if missing:
         print(json.dumps(missing, ensure_ascii=False, indent=2))
     print(f"Selection manifest saved to {OUTPUT_PATH}")
