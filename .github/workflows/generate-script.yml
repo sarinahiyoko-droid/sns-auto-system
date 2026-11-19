@@ -311,6 +311,7 @@ jobs:
             echo "No script changes."
           else
             git commit -m "Update generated trivia script"
+            git pull --rebase origin main
             git push
           fi
 
