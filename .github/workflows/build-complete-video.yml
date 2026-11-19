@@ -2,7 +2,9 @@ name: Build Complete Japanese Trivia Video
 
 on:
   workflow_dispatch:
-      - ".github/workflows/build-complete-video.yml"
+  schedule:
+    # 12:00 UTC = 20:00 Taiwan time, Monday through Friday.
+    - cron: "0 12 * * 1-5"
 
 permissions:
   actions: read
