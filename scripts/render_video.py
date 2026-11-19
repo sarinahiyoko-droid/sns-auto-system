@@ -106,14 +106,13 @@ def main():
             draw.text((540, 1698), highlight, font=load_font(58),
                       fill=(30, 35, 45), anchor="mm")
 
-        # Small visual cue from the script (kept readable, not a paragraph)
-        visual_note = str(scene.get("visual_note", "")).strip()
-        if visual_note:
-            cue = visual_note[:26]
-            draw.rounded_rectangle((130, 1010, 950, 1110), radius=24,
-                                   fill=(55, 91, 130))
-            draw.text((540, 1060), cue, font=load_font(31),
-                      fill=(255, 255, 255), anchor="mm")
+        # A question-mark badge is a visual symbol, not an instruction caption.
+        keywords = scene.get("illustration_keywords", [])
+        if any(keyword in ("クエスチョンマーク", "疑問") for keyword in keywords):
+            draw.ellipse((835, 300, 985, 450), fill=(255, 222, 120),
+                         outline=(255, 255, 255), width=8)
+            draw.text((910, 375), "？", font=load_font(112),
+                      fill=(30, 35, 45), anchor="mm")
 
         path = OUT / f"scene{i}.png"
         canvas.save(path)
