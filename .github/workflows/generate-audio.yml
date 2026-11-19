@@ -46,14 +46,15 @@ jobs:
       - name: Generate Japanese voice
         run: |
           mkdir -p output
+
           python - <<'PY'
+          import json
           from melo.api import TTS
 
-          text = """
-          手紙を出すときに貼る切手。
-          実はその名前には、意外な歴史が隠されています。
-          今回は切手の由来について紹介します。
-          """
+          with open("content/script.json", encoding="utf-8") as f:
+              data = json.load(f)
+
+          text = data["narration"]
 
           model = TTS(language="JP", device="cpu")
           speaker_ids = model.hps.data.spk2id
