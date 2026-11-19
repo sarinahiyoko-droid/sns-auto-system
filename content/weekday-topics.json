@@ -1,0 +1,52 @@
+{
+  "1": {
+    "series": "パンダの意外な生態",
+    "topic": "パンダの白黒模様と保護色",
+    "fact": "2017年の研究は、白い部分が雪景色、黒い部分が暗い森の影に紛れる可能性を示した。ただし模様の理由は一つに確定していない。",
+    "source": {
+      "title": "Caro et al. (2017), Why is the giant panda black and white?",
+      "url": "https://doi.org/10.1093/beheco/arx008"
+    },
+    "keywords": ["パンダ", "雪", "森", "疑問"]
+  },
+  "2": {
+    "series": "パンダの意外な生態",
+    "topic": "パンダの手にある第六の指のような骨",
+    "fact": "パンダの前足には、手首の骨が発達した「偽の親指」があり、竹をつかむのに役立つ。人間の親指と同じ指ではない。",
+    "source": {
+      "title": "Smithsonian National Zoo, Giant Panda",
+      "url": "https://nationalzoo.si.edu/animals/giant-panda"
+    },
+    "keywords": ["パンダ", "人", "疑問"]
+  },
+  "3": {
+    "series": "パンダの意外な生態",
+    "topic": "パンダが一日の大半を食べて過ごす理由",
+    "fact": "パンダの消化器は肉食動物に近く、竹から栄養を取り出す効率が高くない。そのため長い時間を採食に使う。スミソニアンは一日10〜16時間と紹介している。",
+    "source": {
+      "title": "Smithsonian National Zoo, Giant Panda",
+      "url": "https://nationalzoo.si.edu/animals/giant-panda"
+    },
+    "keywords": ["パンダ", "疑問", "森"]
+  },
+  "4": {
+    "series": "パンダの意外な生態",
+    "topic": "生まれたばかりのパンダの驚くほど小さな体",
+    "fact": "新生児の体重は約85〜140グラムで、母親の体重のおよそ900分の1。生まれた直後は目が見えず、毛もほとんどない。",
+    "source": {
+      "title": "WWF, Giant Pandas",
+      "url": "https://www.worldwildlife.org/species/giant-panda/"
+    },
+    "keywords": ["パンダ", "人", "疑問"]
+  },
+  "5": {
+    "series": "パンダの意外な生態",
+    "topic": "パンダはにおいで仲間と情報交換する",
+    "fact": "パンダは木や岩などににおいを残して縄張りや繁殖に関する情報を伝える。スミソニアン国立動物園がこの行動を紹介している。",
+    "source": {
+      "title": "Smithsonian National Zoo, Giant Panda",
+      "url": "https://nationalzoo.si.edu/animals/giant-panda"
+    },
+    "keywords": ["パンダ", "森", "疑問", "人"]
+  }
+}
