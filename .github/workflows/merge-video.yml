@@ -1,16 +1,17 @@
-
 name: Merge Video and Audio
 
 on:
   workflow_dispatch:
     inputs:
       video_run_id:
-        description: "Generate Video の Run ID"
-        required: true
+        description: "空欄なら最新の成功した Generate Video を自動選択"
+        required: false
+        default: ""
         type: string
       audio_run_id:
-        description: "Generate Japanese Audio の Run ID"
-        required: true
+        description: "空欄なら最新の成功した Generate Japanese Audio を自動選択"
+        required: false
+        default: ""
         type: string
 
 permissions:
@@ -23,6 +24,35 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - name: Resolve artifact run IDs
+        id: resolve
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VIDEO_RUN_ID_INPUT: ${{ inputs.video_run_id }}
+          AUDIO_RUN_ID_INPUT: ${{ inputs.audio_run_id }}
+        run: |
+          video_id="$VIDEO_RUN_ID_INPUT"
+          audio_id="$AUDIO_RUN_ID_INPUT"
+
+          if [ -z "$video_id" ]; then
+            video_id="$(gh run list --workflow "Generate Video" --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')"
+          fi
+
+          if [ -z "$audio_id" ]; then
+            audio_id="$(gh run list --workflow "Generate Japanese Audio" --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')"
+          fi
+
+          if [ -z "$video_id" ] || [ -z "$audio_id" ]; then
+            echo "A successful video or audio run could not be found."
+            echo "Run Generate Video and Generate Japanese Audio first."
+            exit 1
+          fi
+
+          echo "Using video run: $video_id"
+          echo "Using audio run: $audio_id"
+          echo "video_run_id=$video_id" >> "$GITHUB_OUTPUT"
+          echo "audio_run_id=$audio_id" >> "$GITHUB_OUTPUT"
+
       - name: Download generated video
         uses: actions/download-artifact@v4
         with:
@@ -30,7 +60,7 @@ jobs:
           path: input/video
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ inputs.video_run_id }}
+          run-id: ${{ steps.resolve.outputs.video_run_id }}
 
       - name: Download generated audio
         uses: actions/download-artifact@v4
@@ -39,7 +69,7 @@ jobs:
           path: input/audio
           github-token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
-          run-id: ${{ inputs.audio_run_id }}
+          run-id: ${{ steps.resolve.outputs.audio_run_id }}
 
       - name: Install FFmpeg
         run: |
@@ -61,6 +91,9 @@ jobs:
             -shortest \
             -movflags +faststart \
             output/final-video.mp4
+
+          test -s output/final-video.mp4
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 output/final-video.mp4
 
       - name: Save final video
         uses: actions/upload-artifact@v4
