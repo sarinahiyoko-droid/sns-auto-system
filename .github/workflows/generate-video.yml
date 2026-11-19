@@ -1,0 +1,52 @@
+
+name: Generate Video
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install FFmpeg and Japanese fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-noto-cjk fontconfig
+
+      - name: Generate video
+        run: |
+          mkdir -p output
+
+          FONT=$(fc-match -f '%{file}' 'Noto Sans CJK JP')
+
+          printf '%s' '20秒でわかる雑学' > output/title.txt
+          printf '%s' '切手の名前には' > output/scene1.txt
+          printf '%s' '意外な歴史がある？' > output/scene2.txt
+          printf '%s' 'その由来を紹介！' > output/scene3.txt
+
+          ffmpeg -y \
+            -f lavfi \
+            -i "color=c=0x101827:s=1080x1920:r=30:d=20" \
+            -vf "drawtext=fontfile=${FONT}:textfile=output/title.txt:fontcolor=white:fontsize=68:x=(w-text_w)/2:y=430:enable='between(t,0,20)':box=1:boxcolor=0x26344a@0.8:boxborderw=30,drawtext=fontfile=${FONT}:textfile=output/scene1.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,2,7)',drawtext=fontfile=${FONT}:textfile=output/scene2.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,7,14)',drawtext=fontfile=${FONT}:textfile=output/scene3.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,14,20)'" \
+            -c:v libx264 \
+            -preset ultrafast \
+            -pix_fmt yuv420p \
+            -movflags +faststart \
+            output/video.mp4
+
+          echo "Video generated successfully!"
+
+      - name: Save video
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-video
+          path: output/video.mp4
+          retention-days: 7
