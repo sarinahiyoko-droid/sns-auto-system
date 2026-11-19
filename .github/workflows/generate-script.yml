@@ -1,0 +1,84 @@
+
+name: Generate Japanese Trivia Script
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Generate script with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+          import urllib.error
+
+          api_key = os.environ.get("GEMINI_API_KEY")
+          if not api_key:
+              raise RuntimeError("GEMINI_API_KEY is not configured.")
+
+          prompt = """
+          あなたは日本語の雑学ショート動画の構成作家です。
+          20秒程度の縦型動画向けに、興味を引く雑学の台本を1本作ってください。
+
+          条件：
+          ・冒頭で視聴者の興味を引く
+          ・内容は正確性を重視する
+          ・確認できない情報や数字を作らない
+          ・ナレーションは自然な日本語
+          ・最後に参考にした情報源を記載する
+          ・タイトル、ナレーション、参考情報源を分ける
+          """
+
+          url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent"
+
+          data = {
+              "contents": [{
+                  "parts": [{"text": prompt}]
+              }]
+          }
+
+          request = urllib.request.Request(
+              url,
+              data=json.dumps(data).encode("utf-8"),
+              headers={
+                  "Content-Type": "application/json",
+                  "x-goog-api-key": api_key
+              },
+              method="POST"
+          )
+
+          try:
+              with urllib.request.urlopen(request, timeout=120) as response:
+                  result = json.loads(response.read().decode("utf-8"))
+          except urllib.error.HTTPError as error:
+              print("Gemini API error:", error.code)
+              print(error.read().decode("utf-8"))
+              raise
+
+          text = result["candidates"][0]["content"]["parts"][0]["text"]
+
+          os.makedirs("output", exist_ok=True)
+          with open("output/script.txt", "w", encoding="utf-8") as file:
+              file.write(text)
+
+          print("Script generated successfully!")
+          print(text)
+          PY
+
+      - name: Save generated script
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-script
+          path: output/script.txt
+          retention-days: 7
