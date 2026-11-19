@@ -24,7 +24,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libsndfile1
+          sudo apt-get install -y build-essential libsndfile1 ffmpeg
 
       - name: Install Python build tools
         run: |
@@ -49,12 +49,19 @@ jobs:
 
           python - <<'PY'
           import json
+          from pathlib import Path
           from melo.api import TTS
 
           with open("content/script.json", encoding="utf-8") as f:
               data = json.load(f)
 
-          text = data["narration"]
+          text = data["narration"].strip()
+
+          if not text:
+              raise ValueError("Narration is empty.")
+
+          print("Generating Japanese narration...")
+          print("Text:", text)
 
           model = TTS(language="JP", device="cpu")
           speaker_ids = model.hps.data.spk2id
@@ -66,8 +73,27 @@ jobs:
               speed=1.0
           )
 
+          audio_path = Path("output/audio.wav")
+
+          if not audio_path.exists() or audio_path.stat().st_size == 0:
+              raise RuntimeError("Audio file was not generated.")
+
           print("Japanese audio generated successfully!")
           PY
+
+      - name: Check audio duration
+        run: |
+          DURATION=$(ffprobe -v error \
+            -show_entries format=duration \
+            -of default=noprint_wrappers=1:nokey=1 \
+            output/audio.wav)
+
+          echo "Audio duration: ${DURATION} seconds"
+
+          if [ -z "$DURATION" ]; then
+            echo "Could not determine audio duration."
+            exit 1
+          fi
 
       - name: Save audio
         uses: actions/upload-artifact@v4
