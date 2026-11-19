@@ -24,6 +24,7 @@ jobs:
           python - <<'PY'
           import json
           import os
+          from datetime import datetime, timezone
           import urllib.request
           import urllib.error
           from pathlib import Path
@@ -154,16 +155,24 @@ jobs:
               for item in illustration_map
               for keyword in item.get("keywords", [])
           })
+          # One distinct, source-backed topic for each weekday (Taiwan time is UTC+8).
+          weekday = datetime.now(timezone.utc).isoweekday()
+          if weekday > 5:
+              weekday = 1
+          topic_plan = json.loads(
+              Path("content/weekday-topics.json").read_text(encoding="utf-8")
+          )[str(weekday)]
+
           prompt += (
-              "\n\n【今回利用できる素材キーワード】\n"
+              "\\n\\n【今回利用できる素材キーワード】\\n"
               + "、".join(available_keywords)
-              + "\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
-              + "\n今回のテーマはジャイアントパンダの白黒模様・保護色・コミュニケーションに限定してください。"
-              + "\n研究の要点：白い体毛は雪景色、黒い肩や脚は森の暗い影に紛れる役割があると示唆されています。"
-              + "\n耳や目の周りの黒い模様は、隠れるためではなく仲間とのコミュニケーションに関係する可能性があります。"
-              + "\n黒い耳や脚が敵から身を守る、と一括りに説明しないでください。"
-              + "\n研究結果は確定した事実と言い切らず「研究では〜と考えられている」と説明してください。"
-              + "\n参考情報源には次の論文を必ず記載してください：Caro et al. (2017), Why is the giant panda black and white?, Behavioral Ecology, https://doi.org/10.1093/beheco/arx008"
+              + "\\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
+              + "\\n【今回の固定テーマ】" + topic_plan["topic"]
+              + "\\n【確認済みの事実】" + topic_plan["fact"]
+              + "\\nこの事実から外れた推測や数字を追加しないでください。"
+              + "\\n【必ず記載する参考情報源】" + topic_plan["source"]["title"]
+              + " " + topic_plan["source"]["url"]
+              + "\\n週5本のシリーズとして、同じ結論や導入文を繰り返さないでください。"
           )
 
           url = (
@@ -223,11 +232,12 @@ jobs:
 
           available_keyword_set = set(available_keywords)
           sources = script.get("sources", [])
-          if not sources or not any(
-              str(source.get("url", "")).startswith("https://")
+          required_source_url = topic_plan["source"]["url"]
+          if not any(
+              source.get("url") == required_source_url
               for source in sources
           ):
-              raise ValueError("At least one HTTPS source URL is required.")
+              raise ValueError("The scheduled topic's verified source URL must be included.")
 
           print("Narration character count:", len(script["narration"]))
           if len(script["narration"]) < 105:
