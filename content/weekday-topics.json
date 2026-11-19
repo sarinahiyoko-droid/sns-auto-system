@@ -89,5 +89,42 @@
       "クレンジング",
       "化粧品"
     ]
+  },
+  "8": {
+    "series": "メイクの意外な知識",
+    "topic": "メイクスポンジは使うたびに洗う？",
+    "fact": "米国皮膚科学会はメイクスポンジを使用後に洗うよう勧めている。スポンジには皮脂や化粧品の残り、汚れがたまりやすく、肌トラブルの原因になることがある。",
+    "source": {
+      "title": "American Academy of Dermatology: When to toss your makeup and sunscreen",
+      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/replace-makeup-sunscreen"
+    },
+    "keywords": [
+      "メイクスポンジ"
+    ]
+  },
+  "9": {
+    "series": "メイクの意外な知識",
+    "topic": "友達とコスメを共有するのは注意",
+    "fact": "米国皮膚科学会は、肌やまつ毛に直接使う化粧品やブラシ、アプリケーターを共有しないよう勧めている。細菌などが移り、感染症や肌トラブルにつながる可能性がある。",
+    "source": {
+      "title": "American Academy of Dermatology: When to toss your makeup and sunscreen",
+      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/replace-makeup-sunscreen"
+    },
+    "keywords": [
+      "化粧品",
+      "メイクブラシ"
+    ]
+  },
+  "10": {
+    "series": "メイクの意外な知識",
+    "topic": "日焼け止めにも使用期限がある",
+    "fact": "米国皮膚科学会によると、日焼け止めは期限切れになると有効成分が分解し、期待した紫外線防御ができなくなる可能性がある。容器の使用期限を確認し、期限切れは使わない。",
+    "source": {
+      "title": "American Academy of Dermatology: When to toss your makeup and sunscreen",
+      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/replace-makeup-sunscreen"
+    },
+    "keywords": [
+      "日焼け止め"
+    ]
   }
 }
