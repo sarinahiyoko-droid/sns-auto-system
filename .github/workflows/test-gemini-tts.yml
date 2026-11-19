@@ -1,0 +1,40 @@
+name: Test Gemini Male TTS
+
+on:
+  push:
+    paths:
+      - ".github/workflows/test-gemini-tts.yml"
+      - "scripts/generate_audio.py"
+      - "content/script.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Generate male Japanese narration
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/generate_audio.py
+
+      - name: Validate audio
+        run: |
+          test -s output/audio.wav
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 output/audio.wav
+
+      - name: Upload TTS test audio
+        uses: actions/upload-artifact@v4
+        with:
+          name: gemini-male-tts-test
+          path: output/audio.wav
+          retention-days: 3
