@@ -44,8 +44,10 @@ jobs:
           with wave.open(str(path), "rb") as audio:
               duration = audio.getnframes() / audio.getframerate()
               print(f"Audio duration: {duration:.2f} seconds")
-              if duration <= 1:
-                  raise RuntimeError("Generated audio is too short.")
+              if duration < 17:
+                  raise RuntimeError("Narration is too short to fill the 20-second video.")
+              if duration > 23:
+                  raise RuntimeError("Narration is too long for the 20-second video.")
           PY
 
       - name: Save audio
