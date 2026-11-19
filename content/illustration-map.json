@@ -1,0 +1,38 @@
+
+[
+  {
+    "name": "パンダ",
+    "file": "panda.png",
+    "keywords": ["パンダ", "動物", "白黒", "熊"]
+  },
+  {
+    "name": "竹",
+    "file": "bamboo.png",
+    "keywords": ["竹", "笹", "植物", "食べ物"]
+  },
+  {
+    "name": "雪山",
+    "file": "snow-mountain.png",
+    "keywords": ["雪山", "雪", "冬", "寒さ", "山"]
+  },
+  {
+    "name": "森",
+    "file": "forest.png",
+    "keywords": ["森", "森林", "木", "自然", "山"]
+  },
+  {
+    "name": "太陽",
+    "file": "sun.png",
+    "keywords": ["太陽", "日光", "暑さ", "光"]
+  },
+  {
+    "name": "人",
+    "file": "person.png",
+    "keywords": ["人", "人物", "男性", "女性"]
+  },
+  {
+    "name": "疑問",
+    "file": "question.png",
+    "keywords": ["疑問", "なぜ", "不思議", "秘密", "理由"]
+  }
+]
