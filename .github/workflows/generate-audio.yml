@@ -3,6 +3,12 @@ name: Generate Japanese Audio
 on:
   workflow_dispatch:
   workflow_call:
+    inputs:
+      use_generated_script:
+        description: "Use the script artifact from the parent workflow"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -15,6 +21,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Download generated script from parent workflow
+        if: ${{ inputs.use_generated_script }}
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-script
+          path: content
 
       - name: Generate Japanese male narration with Gemini TTS
         env:
