@@ -1,3 +1,4 @@
+
 name: Generate Japanese Audio
 
 on:
@@ -8,15 +9,15 @@ permissions:
 
 jobs:
   generate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 25
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.9"
 
@@ -35,7 +36,6 @@ jobs:
           git clone --depth 1 https://github.com/myshell-ai/MeloTTS.git
           cd MeloTTS
           python -m pip install -e .
-          python -m unidic download
           python melo/init_downloads.py
 
       - name: Generate Japanese voice
