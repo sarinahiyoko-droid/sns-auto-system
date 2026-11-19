@@ -1,0 +1,78 @@
+name: Build Complete Japanese Trivia Video
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  generate-script:
+    name: Generate trivia script
+    uses: ./.github/workflows/generate-script.yml
+    secrets: inherit
+
+  generate-audio:
+    name: Generate Japanese narration
+    needs: generate-script
+    uses: ./.github/workflows/generate-audio.yml
+    secrets: inherit
+
+  generate-video:
+    name: Generate illustrated video
+    needs: generate-script
+    uses: ./.github/workflows/generate-video.yml
+    secrets: inherit
+
+  merge:
+    name: Merge video and narration
+    needs: [generate-audio, generate-video]
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - name: Download video artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-video
+          path: input/video
+
+      - name: Download narration artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: japanese-audio
+          path: input/audio
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Merge and validate final video
+        run: |
+          mkdir -p output
+          ffmpeg -y \
+            -i input/video/video.mp4 \
+            -i input/audio/audio.wav \
+            -filter_complex "[1:a:0]apad[aout]" \
+            -map 0:v:0 \
+            -map "[aout]" \
+            -c:v copy \
+            -c:a aac \
+            -b:a 192k \
+            -shortest \
+            -movflags +faststart \
+            output/final-video.mp4
+
+          test -s output/final-video.mp4
+          DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 output/final-video.mp4)
+          SIZE=$(stat -c%s output/final-video.mp4)
+          echo "Final duration: $DURATION seconds"
+          echo "Final size: $SIZE bytes"
+
+      - name: Upload completed video
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-video
+          path: output/final-video.mp4
+          retention-days: 7
