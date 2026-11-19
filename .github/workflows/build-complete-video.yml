@@ -3,7 +3,7 @@ name: Build Complete Japanese Trivia Video
 on:
   workflow_dispatch:
   schedule:
-    # 11:00 UTC = 19:00 Taiwan time; prepare the daily video one hour before posting.
+    # 11:00 UTC = 19:00 Taiwan time; prepare the daily video.
     - cron: "0 11 * * 1-5"
 
 permissions:
@@ -92,18 +92,3 @@ jobs:
           name: final-video
           path: output/final-video.mp4
           retention-days: 7
-
-      # Manual runs perform a PRIVATE YouTube test upload. Scheduled builds only create artifacts.
-      - name: Upload private YouTube test
-        if: github.event_name == 'workflow_dispatch'
-        env:
-          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
-          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
-          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
-        run: |
-          if [ -z "$YT_CLIENT_ID" ] || [ -z "$YT_CLIENT_SECRET" ] || [ -z "$YT_REFRESH_TOKEN" ]; then
-            echo "YouTube secrets are not all configured; skipping private test upload."
-            exit 0
-          fi
-          python -m pip install --disable-pip-version-check google-api-python-client google-auth google-auth-oauthlib
-          python scripts/upload_youtube.py
