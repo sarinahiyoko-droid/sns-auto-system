@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/build-complete-video.yml"
       - "scripts/render_video.py"
+      - ".github/workflows/build-complete-video.yml"
 
 permissions:
   actions: read
