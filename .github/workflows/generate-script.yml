@@ -59,7 +59,7 @@ jobs:
           ・説明を詰め込みすぎない
           ・同じ内容を繰り返さない
           ・最後まで聞きたくなる流れにする
-          ・ナレーション全文は115〜125文字程度、必ず130文字以下にする
+          ・ナレーション全文は115〜135文字程度、必ず145文字以下にする
           ・20秒で自然に読み切れる量にする
 
           【字幕】
@@ -229,9 +229,10 @@ jobs:
           ):
               raise ValueError("At least one HTTPS source URL is required.")
 
+          print("Narration character count:", len(script["narration"]))
           if len(script["narration"]) < 105:
               raise ValueError("Narration is too short for a 20-second short.")
-          if len(script["narration"]) > 130:
+          if len(script["narration"]) > 145:
               raise ValueError("Narration is too long for a 20-second short.")
 
           expected_times = [
