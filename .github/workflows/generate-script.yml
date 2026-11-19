@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   generate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 5
 
     steps:
@@ -34,39 +34,111 @@ jobs:
           prompt = """
           あなたは日本語の雑学ショート動画の構成作家です。
 
-          20秒程度の縦型動画向けに、正確で面白い雑学を1本作ってください。
+          いらすとやのイラストを使った、
+          見ていて楽しく、最後まで見たくなる雑学動画を作ってください。
+
+          【動画の基本設定】
+          ・縦型ショート動画
+          ・動画の長さは約20秒
+          ・4つのシーンで構成
+          ・各シーンは5秒
+          ・自然で親しみやすい日本語
+          ・男性ナレーターが読み上げることを想定
+          ・難しい専門用語は避ける
 
           【構成】
-          1. 冒頭：視聴者が驚く一言
-          2. 疑問：知られていない事実を提示
-          3. 解説：理由や歴史を分かりやすく説明
-          4. 結論：答えを伝えて自然に締める
+          1. 冒頭：驚きや疑問を感じる一言
+          2. 疑問：視聴者が続きを知りたくなる展開
+          3. 解説：理由や仕組みを分かりやすく説明
+          4. 結論：意外性のある答えで締める
 
-          【条件】
-          ・自然な日本語
-          ・ナレーションは20秒程度
-          ・4つの字幕シーンを作る
-          ・字幕は短く読みやすくする
-          ・内容の重複を避ける
-          ・不確かな数字や情報を作らない
-          ・参考情報源を記載する
+          【ナレーション】
+          ・自然な会話調にする
+          ・最初の一言で興味を引く
+          ・説明を詰め込みすぎない
+          ・同じ内容を繰り返さない
+          ・最後まで聞きたくなる流れにする
+
+          【字幕】
+          ・各シーンの字幕は短くする
+          ・一目で意味が伝わる表現にする
+          ・重要な言葉を強調できるようにする
+
+          【イラスト指定】
+          ・各シーンに合う「いらすとや」のイラストを想定する
+          ・illustration_keywordsには検索に使える日本語キーワードを2〜3個入れる
+          ・できるだけ具体的な名詞にする
+          ・例：「パンダ」「竹」「雪山」
+          ・AI画像を生成する指示は書かない
+          ・実際に存在する素材だと断定しない
+          ・同じイラストばかり使わないようにする
+          ・説明に必要な物や動物を優先する
+
+          【演出指定】
+          ・visual_noteには画面に表示するイラストの使い方を書く
+          ・highlightには目立たせる短い言葉を1つ入れる
+          ・motionには簡単な動きの指示を入れる
+          ・例：拡大、左から登場、ゆっくり移動、揺れる
+
+          【正確性】
+          ・科学的、歴史的に正確な内容を優先する
+          ・不確かな情報を事実のように書かない
+          ・数字や研究結果を勝手に作らない
           ・参考情報源を確認済みだと偽らない
-          ・必ずJSON形式だけで回答する
-          ・Markdownやコードブロックは付けない
+          ・確かな参考URLが分からない場合は空文字にする
+          ・一般的なトップページを無理に参考URLにしない
 
           【出力形式】
+          必ず次のJSON形式だけで回答してください。
+          Markdownやコードブロックは不要です。
+
           {
             "title": "動画タイトル",
             "topic": "雑学テーマ",
             "narration": "ナレーション全文",
             "scenes": [
-              {"text": "字幕1", "start": 0, "end": 5},
-              {"text": "字幕2", "start": 5, "end": 10},
-              {"text": "字幕3", "start": 10, "end": 15},
-              {"text": "字幕4", "start": 15, "end": 20}
+              {
+                "text": "字幕1",
+                "start": 0,
+                "end": 5,
+                "illustration_keywords": ["検索語1", "検索語2"],
+                "visual_note": "画面に表示するイラストの説明",
+                "highlight": "強調する言葉",
+                "motion": "イラストの動き"
+              },
+              {
+                "text": "字幕2",
+                "start": 5,
+                "end": 10,
+                "illustration_keywords": ["検索語1", "検索語2"],
+                "visual_note": "画面に表示するイラストの説明",
+                "highlight": "強調する言葉",
+                "motion": "イラストの動き"
+              },
+              {
+                "text": "字幕3",
+                "start": 10,
+                "end": 15,
+                "illustration_keywords": ["検索語1", "検索語2"],
+                "visual_note": "画面に表示するイラストの説明",
+                "highlight": "強調する言葉",
+                "motion": "イラストの動き"
+              },
+              {
+                "text": "字幕4",
+                "start": 15,
+                "end": 20,
+                "illustration_keywords": ["検索語1", "検索語2"],
+                "visual_note": "画面に表示するイラストの説明",
+                "highlight": "強調する言葉",
+                "motion": "イラストの動き"
+              }
             ],
             "sources": [
-              {"title": "参考情報源の名前", "url": "参考URL"}
+              {
+                "title": "参考情報源の名前",
+                "url": "確認できる場合のみURL"
+              }
             ]
           }
           """
@@ -83,7 +155,7 @@ jobs:
               "generationConfig": {
                   "responseMimeType": "application/json",
                   "temperature": 0.7,
-                  "maxOutputTokens": 2500
+                  "maxOutputTokens": 3500
               }
           }
 
@@ -108,21 +180,54 @@ jobs:
           text = result["candidates"][0]["content"]["parts"][0]["text"]
           script = json.loads(text)
 
-          assert all(k in script for k in [
+          required_fields = [
               "title", "topic", "narration", "scenes", "sources"
-          ]), "Missing required fields."
+          ]
 
-          assert len(script["scenes"]) == 4, "Exactly 4 scenes are required."
+          for field in required_fields:
+              if field not in script:
+                  raise ValueError(f"Missing required field: {field}")
 
-          expected_times = [(0, 5), (5, 10), (10, 15), (15, 20)]
-          for scene, (start, end) in zip(script["scenes"], expected_times):
-              assert scene["start"] == start
-              assert scene["end"] == end
-              assert scene["text"].strip()
+          if len(script["scenes"]) != 4:
+              raise ValueError("Exactly 4 scenes are required.")
 
-          assert script["narration"].strip()
+          expected_times = [
+              (0, 5),
+              (5, 10),
+              (10, 15),
+              (15, 20)
+          ]
+
+          for scene, (start, end) in zip(
+              script["scenes"], expected_times
+          ):
+              if scene["start"] != start or scene["end"] != end:
+                  raise ValueError("Scene timing is incorrect.")
+
+              for field in [
+                  "text",
+                  "illustration_keywords",
+                  "visual_note",
+                  "highlight",
+                  "motion"
+              ]:
+                  if field not in scene:
+                      raise ValueError(f"Missing scene field: {field}")
+
+              if not scene["text"].strip():
+                  raise ValueError("Scene subtitle is empty.")
+
+              if not isinstance(scene["illustration_keywords"], list):
+                  raise ValueError("Illustration keywords must be a list.")
+
+              if not scene["illustration_keywords"]:
+                  raise ValueError("Illustration keywords are empty.")
+
+          if not script["narration"].strip():
+              raise ValueError("Narration is empty.")
 
           Path("content").mkdir(exist_ok=True)
+
           Path("content/script.json").write_text(
               json.dumps(script, ensure_ascii=False, indent=2),
               encoding="utf-8"
