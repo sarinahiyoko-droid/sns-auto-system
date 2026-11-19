@@ -21,21 +21,43 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg fonts-noto-cjk fontconfig
 
-      - name: Generate video
+      - name: Read script data
         run: |
           mkdir -p output
 
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          with open("content/script.json", encoding="utf-8") as f:
+              data = json.load(f)
+
+          Path("output/title.txt").write_text(data["title"], encoding="utf-8")
+
+          for i, scene in enumerate(data["scenes"], start=1):
+              Path(f"output/scene{i}.txt").write_text(
+                  scene["text"], encoding="utf-8"
+              )
+
+          print("Script loaded successfully!")
+          print("Topic:", data["topic"])
+          PY
+
+      - name: Generate video
+        run: |
           FONT=$(fc-match -f '%{file}' 'Noto Sans CJK JP')
 
-          printf '%s' '20秒でわかる雑学' > output/title.txt
-          printf '%s' '切手の名前には' > output/scene1.txt
-          printf '%s' '意外な歴史がある？' > output/scene2.txt
-          printf '%s' 'その由来を紹介！' > output/scene3.txt
+          FILTER="drawtext=fontfile=${FONT}:textfile=output/title.txt:fontcolor=white:fontsize=68:x=(w-text_w)/2:y=430:box=1:boxcolor=0x26344a@0.8:boxborderw=30"
+
+          FILTER="${FILTER},drawtext=fontfile=${FONT}:textfile=output/scene1.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,0,5)'"
+          FILTER="${FILTER},drawtext=fontfile=${FONT}:textfile=output/scene2.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,5,10)'"
+          FILTER="${FILTER},drawtext=fontfile=${FONT}:textfile=output/scene3.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,10,15)'"
+          FILTER="${FILTER},drawtext=fontfile=${FONT}:textfile=output/scene4.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,15,20)'"
 
           ffmpeg -y \
             -f lavfi \
             -i "color=c=0x101827:s=1080x1920:r=30:d=20" \
-            -vf "drawtext=fontfile=${FONT}:textfile=output/title.txt:fontcolor=white:fontsize=68:x=(w-text_w)/2:y=430:enable='between(t,0,20)':box=1:boxcolor=0x26344a@0.8:boxborderw=30,drawtext=fontfile=${FONT}:textfile=output/scene1.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,2,7)',drawtext=fontfile=${FONT}:textfile=output/scene2.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,7,14)',drawtext=fontfile=${FONT}:textfile=output/scene3.txt:fontcolor=white:fontsize=76:x=(w-text_w)/2:y=800:enable='between(t,14,20)'" \
+            -vf "$FILTER" \
             -c:v libx264 \
             -preset ultrafast \
             -pix_fmt yuv420p \
