@@ -1,5 +1,5 @@
 name: Build Complete Japanese Trivia Video
-# End-to-end test after narration-length adjustment
+# End-to-end test after narration and keyword constraints adjustment
 
 on:
   workflow_dispatch:
