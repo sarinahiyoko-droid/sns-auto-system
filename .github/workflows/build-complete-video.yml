@@ -1,11 +1,7 @@
 name: Build Complete Japanese Trivia Video
-# End-to-end test with narration duration guard
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/build-complete-video.yml"
 
 permissions:
   actions: read
