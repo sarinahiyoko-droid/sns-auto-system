@@ -1,0 +1,71 @@
+name: Generate Japanese Audio
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libsndfile1
+
+      - name: Install CPU PyTorch
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+          python -m pip install torch==2.3.1+cpu torchaudio==2.3.1+cpu --index-url https://download.pytorch.org/whl/cpu
+
+      - name: Install MeloTTS
+        run: |
+          git clone --depth 1 https://github.com/myshell-ai/MeloTTS.git
+          cd MeloTTS
+          python -m pip install -e .
+          python -m unidic download
+          python melo/init_downloads.py
+
+      - name: Generate Japanese voice
+        run: |
+          mkdir -p output
+          python - <<'PY'
+          from melo.api import TTS
+
+          text = """
+          手紙を出すときに貼る切手。
+          実はその名前には、意外な歴史が隠されています。
+          今回は切手の由来について紹介します。
+          """
+
+          model = TTS(language="JP", device="cpu")
+          speaker_ids = model.hps.data.spk2id
+
+          model.tts_to_file(
+              text,
+              speaker_ids["JP"],
+              "output/audio.wav",
+              speed=1.0
+          )
+
+          print("Japanese audio generated successfully!")
+          PY
+
+      - name: Save audio
+        uses: actions/upload-artifact@v4
+        with:
+          name: japanese-audio
+          path: output/audio.wav
+          retention-days: 7
