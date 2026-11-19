@@ -1,87 +1,32 @@
 [
   {
     "name": "パンダ",
-    "file": "panda.png",
+    "keywords": ["パンダ", "動物園"],
     "source_page": "https://www.irasutoya.com/2016/07/blog-post_592.html",
-    "keywords": [
-      "パンダ",
-      "動物園",
-      "動物",
-      "白黒",
-      "熊"
-    ]
+    "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiDXJPa2p0GbV8DsTPtRhCNrJgxcsqd8TSVnffC_OrUdC-MNLtXdVoK8JpehYcktMKuug6q_p1ZrLkMJITK0UMt68JHxlZ39Sk-RBo47VIDhxMu_0aG12PVeWFIP3JgM05oL0OG62yxXvjs/s400/animal_bear_panda.png"
   },
   {
-    "name": "竹林",
-    "file": "bamboo-grove.png",
-    "source_page": "https://www.irasutoya.com/2017/12/blog-post_537.html",
-    "keywords": [
-      "竹",
-      "笹",
-      "竹林",
-      "植物",
-      "食べ物"
-    ]
+    "name": "疑問の表情の猫",
+    "keywords": ["クエスチョンマーク", "疑問", "悩む人"],
+    "source_page": "https://www.irasutoya.com/2018/09/blog-post_84.html",
+    "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjoBo1I8OKF4GU_Us3z73VjiEQiUJgqArbwJfl7ycKmMOijkuEmTpMK-y0BpUI6Bf3DzOqaJ9F8ILABZg_es8udnUkQ-nuQ4fReel570O-sA_ZlkuP3Zy_cCvlBFu9mCF-8T-7uVV4-w7-K/s195/thumbnail_cat3.jpg"
   },
   {
     "name": "雪山",
-    "file": "snow-mountain.png",
+    "keywords": ["雪山", "雪"],
     "source_page": "https://www.irasutoya.com/2014/07/blog-post_2140.html",
-    "keywords": [
-      "雪山",
-      "雪",
-      "冬",
-      "寒さ",
-      "山"
-    ]
+    "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHmblQkB2DeJBrv6qnkWOswCs6rlzlDn-fVD3wfVaEf_DkoF84Yu3bWcaKHqvZfoiBPURTu9PTQlgCCktXEEGm8LGDgq9EOhadrQ3BGMoa6dPYleaqggQiEDEhN7GXQr_XAgXJeradr3g/s450/yukiyama.png"
   },
   {
     "name": "森",
-    "file": "forest.png",
+    "keywords": ["森林", "森", "木々"],
     "source_page": "https://www.irasutoya.com/2014/08/blog-post_80.html",
-    "keywords": [
-      "森",
-      "森林",
-      "木",
-      "自然",
-      "山"
-    ]
+    "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdLqIwCVhy8ozY6HGvjn6ijFQastXtvtOPktW1SU846yHulJWNYxjHsak0dQssuL9wbdVCPKxjKxXtdlf6tYt3bwdQT_71wwSrJASMFdcsyz6Gpjboo4F3zARAQML1BgHmJSeMVehKnY4/s400/mori.png"
   },
   {
-    "name": "疑問",
-    "file": "question.png",
-    "source_page": "https://www.irasutoya.com/2012/12/blog-post_516.html",
-    "keywords": [
-      "疑問",
-      "なぜ",
-      "不思議",
-      "秘密",
-      "理由",
-      "クエスチョンマーク"
-    ]
-  },
-  {
-    "name": "双眼鏡を覗く男性",
-    "file": "man-binoculars.png",
+    "name": "双眼鏡を覗く人",
+    "keywords": ["双眼鏡", "探す人"],
     "source_page": "https://www.irasutoya.com/2013/12/blog-post_8868.html",
-    "keywords": [
-      "双眼鏡",
-      "探す人",
-      "探す",
-      "男性",
-      "人"
-    ]
-  },
-  {
-    "name": "頭に疑問符を浮かべた男性",
-    "file": "confused-man.png",
-    "source_page": "https://www.irasutoya.com/2016/04/blog-post_78.html",
-    "keywords": [
-      "悩む人",
-      "疑問",
-      "男性",
-      "人",
-      "クエスチョンマーク"
-    ]
+    "image_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEilvBo3sMoeh_-5CH5gbGAKQEniOXMBUm5hBQAYzWvCI3ULpl-ZwqINVMEmTqM6Hq6hn62XczmYWnbfu2Fqr2n-oFUOE89VXF4YwFO1jaGROJQ6SGOBcViQWdunhnM5nlRvmaIoawNlFfBI/s400/sougankyou_nozoku_boy.png"
   }
 ]
