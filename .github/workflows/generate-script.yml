@@ -3,6 +3,7 @@ name: Generate Japanese Trivia Script
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write
