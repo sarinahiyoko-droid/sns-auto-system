@@ -61,7 +61,7 @@ jobs:
           ・説明を詰め込みすぎない
           ・同じ内容を繰り返さない
           ・最後まで聞きたくなる流れにする
-          ・ナレーション全文は135〜155文字にする（句読点も1文字として数える）
+          ・ナレーション全文は105〜130文字を目安にする（句読点も1文字として数える）
           ・早口でも聞き取れる短文中心。1文を短くし、余計な前置きは入れない
           ・短くまとめすぎず、4シーンそれぞれの内容がナレーションに入るようにする
           ・文字数が足りない場合は、確認済みの事実の説明を具体的に補い、同じ意味の繰り返しで水増ししない
@@ -227,9 +227,9 @@ jobs:
               raise ValueError("The scheduled topic's verified source URL must be included.")
 
           print("Narration character count:", len(script["narration"]))
-          if len(script["narration"]) < 120:
+          if len(script["narration"]) < 100:
               raise ValueError("Narration is too short for a 20-second short.")
-          if len(script["narration"]) > 160:
+          if len(script["narration"]) > 140:
               raise ValueError("Narration is too long for a 20-second short.")
 
           expected_times = [
