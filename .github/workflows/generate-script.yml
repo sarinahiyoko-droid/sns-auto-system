@@ -1,10 +1,11 @@
+
 name: Generate Japanese Trivia Script
 
 on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   generate:
@@ -12,6 +13,9 @@ jobs:
     timeout-minutes: 5
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Generate script with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -21,6 +25,7 @@ jobs:
           import os
           import urllib.request
           import urllib.error
+          from pathlib import Path
 
           api_key = os.environ.get("GEMINI_API_KEY")
           if not api_key:
@@ -28,23 +33,58 @@ jobs:
 
           prompt = """
           あなたは日本語の雑学ショート動画の構成作家です。
-          20秒程度の縦型動画向けに、興味を引く雑学の台本を1本作ってください。
 
-          条件：
-          ・冒頭で視聴者の興味を引く
-          ・内容は正確性を重視する
-          ・確認できない情報や数字を作らない
-          ・ナレーションは自然な日本語
-          ・最後に参考にした情報源を記載する
-          ・タイトル、ナレーション、参考情報源を分ける
+          20秒程度の縦型動画向けに、正確で面白い雑学を1本作ってください。
+
+          【構成】
+          1. 冒頭：視聴者が驚く一言
+          2. 疑問：知られていない事実を提示
+          3. 解説：理由や歴史を分かりやすく説明
+          4. 結論：答えを伝えて自然に締める
+
+          【条件】
+          ・自然な日本語
+          ・ナレーションは20秒程度
+          ・4つの字幕シーンを作る
+          ・字幕は短く読みやすくする
+          ・内容の重複を避ける
+          ・不確かな数字や情報を作らない
+          ・参考情報源を記載する
+          ・参考情報源を確認済みだと偽らない
+          ・必ずJSON形式だけで回答する
+          ・Markdownやコードブロックは付けない
+
+          【出力形式】
+          {
+            "title": "動画タイトル",
+            "topic": "雑学テーマ",
+            "narration": "ナレーション全文",
+            "scenes": [
+              {"text": "字幕1", "start": 0, "end": 5},
+              {"text": "字幕2", "start": 5, "end": 10},
+              {"text": "字幕3", "start": 10, "end": 15},
+              {"text": "字幕4", "start": 15, "end": 20}
+            ],
+            "sources": [
+              {"title": "参考情報源の名前", "url": "参考URL"}
+            ]
+          }
           """
 
-          url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent"
+          url = (
+              "https://generativelanguage.googleapis.com/"
+              "v1beta/models/gemini-3.5-flash-lite:generateContent"
+          )
 
           data = {
               "contents": [{
                   "parts": [{"text": prompt}]
-              }]
+              }],
+              "generationConfig": {
+                  "responseMimeType": "application/json",
+                  "temperature": 0.7,
+                  "maxOutputTokens": 2500
+              }
           }
 
           request = urllib.request.Request(
@@ -66,18 +106,49 @@ jobs:
               raise
 
           text = result["candidates"][0]["content"]["parts"][0]["text"]
+          script = json.loads(text)
 
-          os.makedirs("output", exist_ok=True)
-          with open("output/script.txt", "w", encoding="utf-8") as file:
-              file.write(text)
+          assert all(k in script for k in [
+              "title", "topic", "narration", "scenes", "sources"
+          ]), "Missing required fields."
+
+          assert len(script["scenes"]) == 4, "Exactly 4 scenes are required."
+
+          expected_times = [(0, 5), (5, 10), (10, 15), (15, 20)]
+          for scene, (start, end) in zip(script["scenes"], expected_times):
+              assert scene["start"] == start
+              assert scene["end"] == end
+              assert scene["text"].strip()
+
+          assert script["narration"].strip()
+
+          Path("content").mkdir(exist_ok=True)
+          Path("content/script.json").write_text(
+              json.dumps(script, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
 
           print("Script generated successfully!")
-          print(text)
+          print(json.dumps(script, ensure_ascii=False, indent=2))
           PY
 
-      - name: Save generated script
+      - name: Save script to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add content/script.json
+
+          if git diff --cached --quiet; then
+            echo "No script changes."
+          else
+            git commit -m "Update generated trivia script"
+            git push
+          fi
+
+      - name: Save generated script artifact
         uses: actions/upload-artifact@v4
         with:
           name: generated-script
-          path: output/script.txt
+          path: content/script.json
           retention-days: 7
