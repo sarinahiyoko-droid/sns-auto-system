@@ -1,61 +1,57 @@
 {
-  "title": "パンダの赤ちゃんは驚くほど小さい！",
-  "topic": "生まれたばかりのパンダの驚くほど小さな体",
-  "narration": "生まれたばかりのパンダを見たことはありますか？実は体重がわずか百グラムほどしかないんです。お母さんの体重の九百分のしかも目も見えていません。大人の千分の一ほどの小ささで生まれるなんて驚きですね。この特徴を知ると、身近な姿も少し違って見えてきますね。",
+  "title": "シークレットモードの本当の仕組み",
+  "topic": "ネット・SNS・スマホの身近な仕組み",
+  "narration": "シークレットモードなら安心、って思っていませんか？実はこれ、端末に履歴を残さない機能なんです。じゃあ、自分の行動は完全に隠れているのでしょうか？実は、アクセス先のサイトやネットワークの管理者には、あなたの活動がしっかり見えているんです。",
   "scenes": [
     {
-      "text": "生まれたてのパンダって？",
+      "text": "シークレットモードは安心？",
       "start": 0,
       "end": 5,
       "illustration_keywords": [
-        "パンダ",
-        "クエスチョンマーク"
+        "スマートフォン"
       ],
-      "visual_note": "画面の中央にパンダのイラストを大きく配置し、クエスチョンマークをポンと登場させる",
-      "highlight": "生まれたて",
-      "motion": "ポンと登場"
+      "visual_note": "中央にスマートフォンを使う人のイラスト",
+      "highlight": "安心",
+      "motion": "ゆっくり拡大"
     },
     {
-      "text": "体重はわずか百グラムほど！",
+      "text": "実は端末に履歴を残さない機能",
       "start": 5,
       "end": 10,
       "illustration_keywords": [
-        "パンダ",
-        "疑問"
+        "パソコン"
       ],
-      "visual_note": "小さなパンダのイラストをクローズアップして目立たせる",
-      "highlight": "百グラム",
-      "motion": "拡大"
+      "visual_note": "中央にパソコンのイラスト",
+      "highlight": "履歴を残さない",
+      "motion": "わずかに右に移動"
     },
     {
-      "text": "お母さんの九百分の1の軽さ",
+      "text": "行動は完全に隠れているの？",
       "start": 10,
       "end": 15,
       "illustration_keywords": [
-        "パンダ",
-        "動物園"
+        "鍵"
       ],
-      "visual_note": "動物園の背景にパンダの親子を並べて配置する",
-      "highlight": "九百分の1",
-      "motion": "ゆっくり移動"
+      "visual_note": "中央に大きな鍵のイラスト",
+      "highlight": "完全に隠れて",
+      "motion": "ゆっくり縮小"
     },
     {
-      "text": "目も見えない驚きの小ささ",
+      "text": "管理者には活動が見えています",
       "start": 15,
       "end": 20,
       "illustration_keywords": [
-        "パンダ",
-        "双眼鏡"
+        "Wi-Fi"
       ],
-      "visual_note": "双眼鏡を覗くイラストとパンダを組み合わせて表示する",
-      "highlight": "目も見えない",
-      "motion": "揺れる"
+      "visual_note": "中央にWi-Fiマークのイラスト",
+      "highlight": "見えています",
+      "motion": "ゆっくり拡大"
     }
   ],
   "sources": [
     {
-      "title": "WWF, Giant Pandas",
-      "url": "https://www.worldwildlife.org/species/giant-panda/"
+      "title": "Google Chrome Help: Browse in Incognito mode",
+      "url": "https://support.google.com/chrome/answer/95464"
     }
   ]
 }
