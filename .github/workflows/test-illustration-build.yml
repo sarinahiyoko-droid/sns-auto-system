@@ -5,6 +5,8 @@ on:
     paths:
       - ".github/workflows/test-illustration-build.yml"
       - "scripts/render_video.py"
+      - "scripts/download_illustrations.py"
+      - "content/illustration-map.json"
       - "content/script.json"
       - ".github/workflows/*.yml"
   workflow_dispatch:
@@ -45,22 +47,8 @@ jobs:
               print(f"Valid YAML: {path}")
           PY
 
-      - name: Create temporary renderer test images
-        run: |
-          mkdir -p assets/illustrations
-          python - <<'PY'
-          from PIL import Image, ImageDraw
-          from pathlib import Path
-          out = Path("assets/illustrations")
-          for i in range(1, 5):
-              image = Image.new("RGBA", (700, 600), (0, 0, 0, 0))
-              draw = ImageDraw.Draw(image)
-              draw.ellipse((100, 40, 600, 540), fill=(255, 220, 90, 255), outline=(40, 55, 75, 255), width=12)
-              draw.ellipse((230, 190, 300, 270), fill=(30, 30, 30, 255))
-              draw.ellipse((400, 190, 470, 270), fill=(30, 30, 30, 255))
-              draw.arc((250, 230, 450, 420), 10, 170, fill=(30, 30, 30, 255), width=14)
-              image.save(out / f"scene{i}-image1.png")
-          PY
+      - name: Download curated official Irasutoya images
+        run: python scripts/download_illustrations.py
 
       - name: Render vertical video
         run: python scripts/render_video.py
