@@ -1,52 +1,93 @@
 {
   "1": {
-    "series": "パンダの意外な生態",
-    "topic": "パンダの白黒模様と保護色",
-    "fact": "2017年の研究は、白い部分が雪景色、黒い部分が暗い森の影に紛れる可能性を示した。ただし模様の理由は一つに確定していない。",
+    "series": "ネットの意外な仕組み",
+    "topic": "シークレットモードでも完全には隠れない",
+    "fact": "Chromeのシークレットモードは端末に閲覧履歴などを残しにくくする機能。アクセス先のウェブサイト、学校や会社のネットワーク管理者、インターネットサービスプロバイダから活動が見えなくなるわけではない。",
     "source": {
-      "title": "Caro et al. (2017), Why is the giant panda black and white?",
-      "url": "https://doi.org/10.1093/beheco/arx008"
+      "title": "Google Chrome Help: Browse in Incognito mode",
+      "url": "https://support.google.com/chrome/answer/95464"
     },
-    "keywords": ["パンダ", "雪", "森", "疑問"]
+    "keywords": [
+      "スマートフォン",
+      "パソコン"
+    ]
   },
   "2": {
-    "series": "パンダの意外な生態",
-    "topic": "パンダの手にある第六の指のような骨",
-    "fact": "パンダの前足には、手首の骨が発達した「偽の親指」があり、竹をつかむのに役立つ。人間の親指と同じ指ではない。",
+    "series": "ネットの意外な仕組み",
+    "topic": "ウェブサイトのCookieって何？",
+    "fact": "Cookieはウェブサイトがブラウザに保存する小さな情報。ログイン状態や設定、ショッピングカートの内容を覚えるために使われる。サイトをまたいだ追跡など用途は設定や仕組みによって異なる。",
     "source": {
-      "title": "Smithsonian National Zoo, Giant Panda",
-      "url": "https://nationalzoo.si.edu/animals/giant-panda"
+      "title": "Google Chrome Help: Clear, enable, and manage cookies in Chrome",
+      "url": "https://support.google.com/chrome/answer/95647"
     },
-    "keywords": ["パンダ", "人", "疑問"]
+    "keywords": [
+      "クッキー",
+      "パソコン"
+    ]
   },
   "3": {
-    "series": "パンダの意外な生態",
-    "topic": "パンダが一日の大半を食べて過ごす理由",
-    "fact": "パンダの消化器は肉食動物に近く、竹から栄養を取り出す効率が高くない。そのため長い時間を採食に使う。スミソニアンは一日10〜16時間と紹介している。",
+    "series": "ネットの意外な仕組み",
+    "topic": "おすすめ動画が似た内容ばかりになる理由",
+    "fact": "動画サービスのおすすめは、視聴履歴や反応など複数のシグナルを使って利用者が興味を持ちそうな動画を選ぶ。見た動画や反応が次のおすすめに影響することがある。",
     "source": {
-      "title": "Smithsonian National Zoo, Giant Panda",
-      "url": "https://nationalzoo.si.edu/animals/giant-panda"
+      "title": "YouTube Help: How YouTube recommendations work",
+      "url": "https://support.google.com/youtube/answer/6342839"
     },
-    "keywords": ["パンダ", "疑問", "森"]
+    "keywords": [
+      "スマートフォン",
+      "動画"
+    ]
   },
   "4": {
-    "series": "パンダの意外な生態",
-    "topic": "生まれたばかりのパンダの驚くほど小さな体",
-    "fact": "新生児の体重は約85〜140グラムで、母親の体重のおよそ900分の1。生まれた直後は目が見えず、毛もほとんどない。",
+    "series": "メイクの意外な知識",
+    "topic": "メイクブラシは何日ごとに洗う？",
+    "fact": "米国皮膚科学会はメイクブラシを7〜10日ごとに洗うことを勧めている。ブラシには化粧品の残り、皮脂、汚れなどが付着し、肌荒れや感染の原因になることがある。",
     "source": {
-      "title": "WWF, Giant Pandas",
-      "url": "https://www.worldwildlife.org/species/giant-panda/"
+      "title": "American Academy of Dermatology: How to clean your makeup brushes",
+      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/routine/clean-your-makeup-brushes"
     },
-    "keywords": ["パンダ", "人", "疑問"]
+    "keywords": [
+      "化粧ブラシ",
+      "メイク"
+    ]
   },
   "5": {
-    "series": "パンダの意外な生態",
-    "topic": "パンダはにおいで仲間と情報交換する",
-    "fact": "パンダは木や岩などににおいを残して縄張りや繁殖に関する情報を伝える。スミソニアン国立動物園がこの行動を紹介している。",
+    "series": "メイクの意外な知識",
+    "topic": "マスカラを長く使い続けない方がいい理由",
+    "fact": "米国皮膚科学会はマスカラを開封後およそ3か月で交換する目安を紹介している。古い化粧品は細菌やカビで汚染され、目の感染症や肌トラブルにつながる可能性がある。",
     "source": {
-      "title": "Smithsonian National Zoo, Giant Panda",
-      "url": "https://nationalzoo.si.edu/animals/giant-panda"
+      "title": "American Academy of Dermatology: When to toss your makeup and sunscreen",
+      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/replace-makeup-sunscreen"
     },
-    "keywords": ["パンダ", "森", "疑問", "人"]
+    "keywords": [
+      "マスカラ",
+      "化粧品"
+    ]
+  },
+  "6": {
+    "series": "メイクの意外な知識",
+    "topic": "ニキビが気になる人のファンデ選び",
+    "fact": "米国皮膚科学会はニキビができやすい人に、オイルフリーやノンコメドジェニック（毛穴を詰まらせにくい）と表示された化粧品を選ぶことを勧めている。ただし全員に同じ製品が合うわけではない。",
+    "source": {
+      "title": "American Academy of Dermatology: I have acne! Is it okay to wear makeup?",
+      "url": "https://www.aad.org/public/diseases/acne/causes/makeup"
+    },
+    "keywords": [
+      "ファンデーション",
+      "化粧品"
+    ]
+  },
+  "7": {
+    "series": "メイクの意外な知識",
+    "topic": "メイクをしたまま寝るとどうなる？",
+    "fact": "米国皮膚科学会は、ノンコメドジェニック製品であってもメイクを落とさず寝るとニキビにつながることがあるとして、就寝前にメイクを落とすよう勧めている。",
+    "source": {
+      "title": "American Academy of Dermatology: 10 skin care habits that can worsen acne",
+      "url": "https://www.aad.org/public/diseases/acne/skin-care/habits-stop"
+    },
+    "keywords": [
+      "クレンジング",
+      "化粧品"
+    ]
   }
 }
