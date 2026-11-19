@@ -1,62 +1,49 @@
 {
-  "title": "パンダの模様の意外な秘密",
-  "topic": "ジャイアントパンダの保護色と生息地",
-  "narration": "パンダのあの模様、実は隠れるためじゃないって知ってた？白黒の体が目立ちそうだけど、実はあれ雪山や森林に溶け込む迷彩なんだよ。特に白い部分は雪景色に、黒い部分は影に隠れる役割があるんだって。だから野生のパンダは、遠くからだと意外と見つかりにくいんだ。",
+  "title": "パンダの白黒模様には3つの役割",
+  "topic": "ジャイアントパンダの白黒模様とカモフラージュ・コミュニケーション",
+  "narration": "パンダの白黒模様、実は全部同じ理由じゃないんだ。研究では、体の白い部分は雪景色に、黒い脚や肩は森の暗い影に紛れるカモフラージュと考えられている。さらに、耳や目の周りの黒い模様は、仲間とのコミュニケーションに関係する可能性もあるんだ。",
   "scenes": [
     {
-      "text": "パンダの白黒模様、実は…",
+      "text": "白黒模様には理由がある！",
       "start": 0,
       "end": 5,
-      "illustration_keywords": [
-        "パンダ",
-        "動物園"
-      ],
+      "illustration_keywords": ["パンダ"],
       "visual_note": "画面の中央にパンダのイラストを大きく配置する",
       "highlight": "白黒模様",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "隠れるためじゃないの？",
+      "text": "白い部分は雪景色に",
       "start": 5,
       "end": 10,
-      "illustration_keywords": [
-        "クエスチョンマーク",
-        "悩む人"
-      ],
-      "visual_note": "パンダのイラストの横に大きなハテナマークを表示する",
-      "highlight": "隠れるため",
-      "motion": "左右に揺れる"
-    },
-    {
-      "text": "雪山や森林に溶け込む迷彩！",
-      "start": 10,
-      "end": 15,
-      "illustration_keywords": [
-        "雪山",
-        "森林",
-        "パンダ"
-      ],
-      "visual_note": "雪山と木々のイラストの背景にパンダを配置する",
-      "highlight": "迷彩",
+      "illustration_keywords": ["雪山"],
+      "visual_note": "雪山のイラストを背景に、パンダの白い体を強調する",
+      "highlight": "雪景色",
       "motion": "左から登場"
     },
     {
-      "text": "遠くからだと見つからない！",
+      "text": "黒い脚や肩は森の影に",
+      "start": 10,
+      "end": 15,
+      "illustration_keywords": ["森林", "森"],
+      "visual_note": "森のイラストを背景に、パンダの黒い脚や肩を強調する",
+      "highlight": "森の影",
+      "motion": "ゆっくり移動"
+    },
+    {
+      "text": "顔の黒い模様は仲間への合図かも？",
       "start": 15,
       "end": 20,
-      "illustration_keywords": [
-        "双眼鏡",
-        "探す人"
-      ],
-      "visual_note": "双眼鏡を覗いている人のイラストを表示する",
-      "highlight": "見つからない",
-      "motion": "少し縮小"
+      "illustration_keywords": ["クエスチョンマーク", "疑問"],
+      "visual_note": "パンダの顔と表情のイラストを並べ、コミュニケーションを表現する",
+      "highlight": "仲間への合図",
+      "motion": "少し拡大"
     }
   ],
   "sources": [
     {
-      "title": "",
-      "url": ""
+      "title": "Caro et al. (2017), Why is the giant panda black and white?, Behavioral Ecology",
+      "url": "https://doi.org/10.1093/beheco/arx008"
     }
   ]
 }
