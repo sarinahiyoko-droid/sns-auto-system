@@ -3,6 +3,15 @@ name: Merge Video and Audio
 
 on:
   workflow_dispatch:
+    inputs:
+      video_run_id:
+        description: "Generate Video の Run ID"
+        required: true
+        type: string
+      audio_run_id:
+        description: "Generate Japanese Audio の Run ID"
+        required: true
+        type: string
 
 permissions:
   actions: read
@@ -19,12 +28,18 @@ jobs:
         with:
           name: generated-video
           path: input/video
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.video_run_id }}
 
       - name: Download generated audio
         uses: actions/download-artifact@v4
         with:
           name: japanese-audio
           path: input/audio
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.audio_run_id }}
 
       - name: Install FFmpeg
         run: |
