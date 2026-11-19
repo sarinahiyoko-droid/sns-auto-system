@@ -2,10 +2,6 @@ name: Build Complete Japanese Trivia Video
 
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - ".github/workflows/build-complete-video.yml"
-      - "scripts/render_video.py"
       - ".github/workflows/build-complete-video.yml"
 
 permissions:
