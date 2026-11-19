@@ -1,11 +1,6 @@
 name: Test Gemini Male TTS
 
 on:
-  push:
-    paths:
-      - ".github/workflows/test-gemini-tts.yml"
-      - "scripts/generate_audio.py"
-      - "content/script.json"
   workflow_dispatch:
 
 permissions:
