@@ -59,6 +59,8 @@ jobs:
           ・説明を詰め込みすぎない
           ・同じ内容を繰り返さない
           ・最後まで聞きたくなる流れにする
+          ・ナレーション全文は90〜105文字程度、必ず115文字以下にする
+          ・20秒で自然に読み切れる量にする
 
           【字幕】
           ・各シーンの字幕は短くする
@@ -220,7 +222,7 @@ jobs:
           ):
               raise ValueError("At least one HTTPS source URL is required.")
 
-          if len(script["narration"]) > 125:
+          if len(script["narration"]) > 115:
               raise ValueError("Narration is too long for a 20-second short.")
 
           expected_times = [
