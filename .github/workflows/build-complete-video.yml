@@ -51,10 +51,16 @@ jobs:
       - name: Merge and validate final video
         run: |
           mkdir -p output
+          VIDEO_DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 input/video/video.mp4)
+          AUDIO_DURATION=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 input/audio/audio.wav)
+          TEMPO=$(python -c 'import sys; v=float(sys.argv[1]); a=float(sys.argv[2]); print(max(1.0, a / v))' "$VIDEO_DURATION" "$AUDIO_DURATION")
+          python -c 'import sys; factor=float(sys.argv[1]); sys.exit(1 if factor > 1.20 else 0)' "$TEMPO"
+          echo "Video: $VIDEO_DURATION sec; audio: $AUDIO_DURATION sec; audio tempo: $TEMPO"
+
           ffmpeg -y \
             -i input/video/video.mp4 \
             -i input/audio/audio.wav \
-            -filter_complex "[1:a:0]apad[aout]" \
+            -filter_complex "[1:a:0]atempo=${TEMPO},apad[aout]" \
             -map 0:v:0 \
             -map "[aout]" \
             -c:v copy \
