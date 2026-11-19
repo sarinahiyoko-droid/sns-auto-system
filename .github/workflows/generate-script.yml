@@ -153,12 +153,12 @@ jobs:
               for keyword in item.get("keywords", [])
           })
           prompt += (
-              "\\n\\n【今回利用できる素材キーワード】\\n"
+              "\n\n【今回利用できる素材キーワード】\n"
               + "、".join(available_keywords)
-              + "\\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
-              + "\\n今回のテーマはジャイアントパンダの白黒模様・保護色・コミュニケーションに限定してください。"
-              + "\\n研究結果は確定した事実と言い切らず「研究では〜と考えられている」と説明してください。"
-              + "\\n参考情報源には次の論文を必ず記載してください：Caro et al. (2017), Why is the giant panda black and white?, Behavioral Ecology, https://doi.org/10.1093/beheco/arx008"
+              + "\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
+              + "\n今回のテーマはジャイアントパンダの白黒模様・保護色・コミュニケーションに限定してください。"
+              + "\n研究結果は確定した事実と言い切らず「研究では〜と考えられている」と説明してください。"
+              + "\n参考情報源には次の論文を必ず記載してください：Caro et al. (2017), Why is the giant panda black and white?, Behavioral Ecology, https://doi.org/10.1093/beheco/arx008"
           )
 
           url = (
