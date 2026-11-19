@@ -1,0 +1,46 @@
+name: Test Illustrated Video Build
+
+on:
+  push:
+    paths:
+      - ".github/workflows/test-illustration-build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-noto-cjk
+          python -m pip install --upgrade pip
+          python -m pip install Pillow
+
+      - name: Validate script JSON
+        run: python -m json.tool content/script.json > /dev/null
+
+      - name: Download illustrations from Irasutoya
+        run: python scripts/download_illustrations.py
+
+      - name: Render illustrated video
+        run: python scripts/render_video.py
+
+      - name: Verify generated MP4
+        run: |
+          test -s output/video.mp4
+          ffprobe -v error -show_entries format=duration,size -of default=noprint_wrappers=1 output/video.mp4
+
+      - name: Upload test video
+        uses: actions/upload-artifact@v4
+        with:
+          name: illustrated-video-test
+          path: output/video.mp4
+          retention-days: 3
