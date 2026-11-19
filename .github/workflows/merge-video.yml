@@ -83,8 +83,9 @@ jobs:
           ffmpeg -y \
             -i input/video/video.mp4 \
             -i input/audio/audio.wav \
+            -filter_complex "[1:a:0]apad[aout]" \
             -map 0:v:0 \
-            -map 1:a:0 \
+            -map "[aout]" \
             -c:v copy \
             -c:a aac \
             -b:a 192k \
