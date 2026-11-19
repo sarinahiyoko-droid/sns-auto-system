@@ -34,10 +34,10 @@ jobs:
               raise RuntimeError("GEMINI_API_KEY is not configured.")
 
           prompt = """
-          あなたは日本語の雑学ショート動画の構成作家です。
+          あなたは日本語のショート動画の構成作家です。動物をテーマにしないでください。
 
-          いらすとやのイラストを使った、
-          見ていて楽しく、最後まで見たくなる雑学動画を作ってください。
+          いらすとやのイラストを1シーン1点だけ使った、最後まで見たくなる短尺動画を作ってください。
+          テーマはネット・SNS・スマホの身近な仕組み、またはメイク・美容の実用知識に限定します。
 
           【動画の基本設定】
           ・縦型ショート動画
@@ -46,6 +46,7 @@ jobs:
           ・各シーンは5秒
           ・自然で親しみやすい日本語
           ・男性ナレーターが読み上げることを想定
+          ・説明はテンポよく、短い文で、間延びさせない
           ・難しい専門用語は避ける
 
           【構成】
@@ -60,7 +61,8 @@ jobs:
           ・説明を詰め込みすぎない
           ・同じ内容を繰り返さない
           ・最後まで聞きたくなる流れにする
-          ・ナレーション全文は120〜135文字にする（句読点も1文字として数える）
+          ・ナレーション全文は135〜155文字にする（句読点も1文字として数える）
+          ・早口でも聞き取れる短文中心。1文を短くし、余計な前置きは入れない
           ・短くまとめすぎず、4シーンそれぞれの内容がナレーションに入るようにする
           ・文字数が足りない場合は、確認済みの事実の説明を具体的に補い、同じ意味の繰り返しで水増ししない
           ・20秒で自然に読み切れる量にする
@@ -71,21 +73,20 @@ jobs:
           ・重要な言葉を強調できるようにする
 
           【イラスト指定】
-          ・各シーンに合う「いらすとや」のイラストを想定する
-          ・illustration_keywordsは内容の中心となる具体的な物・動物を最優先する
-          ・抽象語（悩み、疑問、雰囲気、探す人など）や、内容と直接関係しない小道具を使わない
-          ・テーマの主役がパンダなら、無理に別の物を選ばず「パンダ」を繰り返し使ってよい
-          ・各シーンの絵だけを見ても、何の話か伝わる組み合わせにする
-          ・説明に必要な主役を大きく見せる
+          ・各シーンで「いらすとや」のイラストを1点だけ使う
+          ・illustration_keywordsは、いらすとやサイト内で検索しやすい具体的な名詞を1つだけ指定する
+          ・ネット系はスマートフォン、パソコン、鍵、メール、Wi-Fiなど。メイク系は口紅、化粧ブラシ、鏡、化粧品など
+          ・動物をテーマにしない。動物イラストを検索語にしない
+          ・各シーンの主役を1つに絞り、説明内容と直接結びつける
           ・AI画像を生成する指示は書かない
           ・実際に存在する素材だと断定しない
 
           【演出指定】
-          ・visual_noteには主役のイラストを大きく見せる方法を書く
-          ・visual_noteはポップで明るく、ひと目で意味が伝わる演出にする
-          ・highlightには目立たせる短い言葉を1つ入れる
-          ・motionには拡大、ポンと登場、左右移動など分かりやすい動きを指定する
-          ・例：拡大、左から登場、ゆっくり移動、揺れる
+          ・背景は白。中央にイラスト1点、画面下部に短い字幕だけのシンプルな画面
+          ・余計な飾りや複数のイラストを前提にしない
+          ・visual_noteには中央に大きく表示する主役を書く
+          ・highlightには字幕で強調する短い言葉を1つ入れる
+          ・motionにはゆっくり拡大など控えめな動きを指定する
 
           【正確性】
           ・科学的、歴史的に正確な内容を優先する
@@ -150,27 +151,16 @@ jobs:
           }
           """
 
-          illustration_map = json.loads(
-              Path("content/illustration-map.json").read_text(encoding="utf-8")
-          )
-          available_keywords = sorted({
-              keyword
-              for item in illustration_map
-              for keyword in item.get("keywords", [])
-          })
-          # One distinct, source-backed topic for each weekday (Taiwan time is UTC+8).
-          weekday = datetime.now(timezone.utc).isoweekday()
-          if weekday > 5:
-              weekday = 1
-          topic_plan = json.loads(
+          # Rotate through a larger bank of source-backed internet and makeup topics.
+          topic_bank = json.loads(
               Path("content/weekday-topics.json").read_text(encoding="utf-8")
-          )[str(weekday)]
+          )
+          from datetime import date
+          topic_number = ((date.today() - date(2026, 11, 19)).days % len(topic_bank)) + 1
+          topic_plan = topic_bank[str(topic_number)]
 
           prompt += (
-              "\n\n【今回利用できる素材キーワード】\n"
-              + "、".join(available_keywords)
-              + "\n各シーンのillustration_keywordsには、この一覧の語だけを使ってください。"
-              + "\n【今回の固定テーマ】" + topic_plan["topic"]
+              "\n\n【今回のテーマ】" + topic_plan["topic"]
               + "\n【確認済みの事実】" + topic_plan["fact"]
               + "\nこの事実から外れた推測や数字を追加しないでください。"
               + "\n【必ず記載する参考情報源】" + topic_plan["source"]["title"]
@@ -215,13 +205,7 @@ jobs:
           text = result["candidates"][0]["content"]["parts"][0]["text"]
           script = json.loads(text)
 
-          # Add a topic-neutral closing sentence if the generated narration is slightly short.
-          # This adds no new factual claim and avoids the previous panda-specific filler.
-          if len(script.get("narration", "")) < 105:
-              script["narration"] = (
-                  script["narration"].rstrip("。！？")
-                  + "。この特徴を知ると、身近な姿も少し違って見えてきますね。"
-              )
+          # Keep narration concise and energetic; do not pad with generic filler.
 
           required_fields = [
               "title", "topic", "narration", "scenes", "sources"
@@ -234,7 +218,6 @@ jobs:
           if len(script["scenes"]) != 4:
               raise ValueError("Exactly 4 scenes are required.")
 
-          available_keyword_set = set(available_keywords)
           sources = script.get("sources", [])
           required_source_url = topic_plan["source"]["url"]
           if not any(
@@ -244,9 +227,9 @@ jobs:
               raise ValueError("The scheduled topic's verified source URL must be included.")
 
           print("Narration character count:", len(script["narration"]))
-          if len(script["narration"]) < 105:
+          if len(script["narration"]) < 120:
               raise ValueError("Narration is too short for a 20-second short.")
-          if len(script["narration"]) > 145:
+          if len(script["narration"]) > 160:
               raise ValueError("Narration is too long for a 20-second short.")
 
           expected_times = [
@@ -281,14 +264,11 @@ jobs:
               if not scene["illustration_keywords"]:
                   raise ValueError("Illustration keywords are empty.")
 
-              if len(scene["illustration_keywords"]) > 2:
-                  raise ValueError("Use no more than 2 illustration keywords per scene.")
-
-              if not any(
-                  keyword in available_keyword_set
-                  for keyword in scene["illustration_keywords"]
-              ):
-                  raise ValueError("Each scene must match at least one curated Irasutoya keyword.")
+              if len(scene["illustration_keywords"]) != 1:
+                  raise ValueError("Use exactly one illustration search keyword per scene.")
+              keyword = str(scene["illustration_keywords"][0]).strip()
+              if not keyword or len(keyword) > 20:
+                  raise ValueError("Use one short, concrete Irasutoya search keyword.")
 
           if not script["narration"].strip():
               raise ValueError("Narration is empty.")
