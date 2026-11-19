@@ -117,7 +117,7 @@ def main():
 
     allow_live_search = os.environ.get("ALLOW_LIVE_IRASUTOYA_SEARCH", "").lower() == "true"
     downloaded = 0
-    used_urls = set()
+    downloaded_by_url = {}
 
     for scene_no, scene in enumerate(script.get("scenes", []), 1):
         matched = []
@@ -125,28 +125,35 @@ def main():
             keyword = str(keyword).strip()
             for item in illustration_map:
                 if keyword in item.get("keywords", []) and item.get("image_url"):
-                    if item["image_url"] not in used_urls and item not in matched:
+                    if item not in matched:
                         matched.append(item)
 
         # Two images per scene fit the current vertical layout.
         for image_no, item in enumerate(matched[:2], 1):
-            if downloaded >= MAX_IMAGES:
-                break
+            image_url = item["image_url"]
             try:
-                path = download_image(item["image_url"], f"scene{scene_no}-image{image_no}")
-                used_urls.add(item["image_url"])
-                downloaded += 1
-                print(f"Downloaded {path.name}: {item['name']} ({item['source_page']})")
+                if image_url in downloaded_by_url:
+                    original = downloaded_by_url[image_url]
+                    path = OUT / f"scene{scene_no}-image{image_no}{original.suffix}"
+                    path.write_bytes(original.read_bytes())
+                    print(f"Reused {path.name}: {item['name']}")
+                else:
+                    if downloaded >= MAX_IMAGES:
+                        break
+                    path = download_image(image_url, f"scene{scene_no}-image{image_no}")
+                    downloaded_by_url[image_url] = path
+                    downloaded += 1
+                    print(f"Downloaded {path.name}: {item['name']} ({item['source_page']})")
             except Exception as error:
-                print(f"Could not download curated image '{item.get('name')}': {error}")
+                print(f"Could not use curated image '{item.get('name')}': {error}")
 
         if not matched and allow_live_search:
             for keyword in scene.get("illustration_keywords", []):
                 try:
                     item = find_live_image(str(keyword))
-                    if item and item["image_url"] not in used_urls:
+                    if item and item["image_url"] not in downloaded_by_url:
                         path = download_image(item["image_url"], f"scene{scene_no}-image1")
-                        used_urls.add(item["image_url"])
+                        downloaded_by_url[item["image_url"]] = path
                         downloaded += 1
                         print(f"Downloaded live result {path.name}: {item['source_page']}")
                         break
