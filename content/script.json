@@ -1,57 +1,57 @@
 {
-  "title": "シークレットモードの本当の仕組み",
-  "topic": "ネット・SNS・スマホの身近な仕組み",
-  "narration": "シークレットモードなら安心、って思っていませんか？実はこれ、端末に履歴を残さない機能なんです。じゃあ、自分の行動は完全に隠れているのでしょうか？実は、アクセス先のサイトやネットワークの管理者には、あなたの活動がしっかり見えているんです。",
+  "title": "ウェブサイトのCookieって何？",
+  "topic": "ウェブサイトのCookie",
+  "narration": "ネットで見かけるCookieって一体なに？実は、サイトがあなたのブラウザに保存する小さな情報なんだ。ログイン状態やショッピングカートの内容を覚えるために使われているよ。仕組みを知ると、ネットがぐっと便利になるね。",
   "scenes": [
     {
-      "text": "シークレットモードは安心？",
+      "text": "ネットで見かけるCookieってなに？",
       "start": 0,
       "end": 5,
       "illustration_keywords": [
         "スマートフォン"
       ],
-      "visual_note": "中央にスマートフォンを使う人のイラスト",
-      "highlight": "安心",
+      "visual_note": "画面中央にスマートフォンのイラストを1点配置",
+      "highlight": "Cookie",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "実は端末に履歴を残さない機能",
+      "text": "ブラウザに保存される小さな情報です",
       "start": 5,
       "end": 10,
       "illustration_keywords": [
         "パソコン"
       ],
-      "visual_note": "中央にパソコンのイラスト",
-      "highlight": "履歴を残さない",
-      "motion": "わずかに右に移動"
+      "visual_note": "画面中央にパソコンのイラストを1点配置",
+      "highlight": "小さな情報",
+      "motion": "わずかに左右に揺れる"
     },
     {
-      "text": "行動は完全に隠れているの？",
+      "text": "ログインやカートの内容を覚えます",
       "start": 10,
       "end": 15,
       "illustration_keywords": [
-        "鍵"
+        "買い物かご"
       ],
-      "visual_note": "中央に大きな鍵のイラスト",
-      "highlight": "完全に隠れて",
-      "motion": "ゆっくり縮小"
+      "visual_note": "画面中央に買い物かごのイラストを1点配置",
+      "highlight": "覚える",
+      "motion": "ゆっくり拡大"
     },
     {
-      "text": "管理者には活動が見えています",
+      "text": "仕組みを知るとネットが便利に！",
       "start": 15,
       "end": 20,
       "illustration_keywords": [
-        "Wi-Fi"
+        "虫眼鏡"
       ],
-      "visual_note": "中央にWi-Fiマークのイラスト",
-      "highlight": "見えています",
-      "motion": "ゆっくり拡大"
+      "visual_note": "画面中央に虫眼鏡のイラストを1点配置",
+      "highlight": "便利",
+      "motion": "わずかに上下に動く"
     }
   ],
   "sources": [
     {
-      "title": "Google Chrome Help: Browse in Incognito mode",
-      "url": "https://support.google.com/chrome/answer/95464"
+      "title": "Google Chrome Help: Clear, enable, and manage cookies in Chrome",
+      "url": "https://support.google.com/chrome/answer/95647"
     }
   ]
 }
