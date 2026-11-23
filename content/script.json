@@ -1,57 +1,57 @@
 {
-  "title": "ウェブサイトのCookieって何？",
-  "topic": "ウェブサイトのCookie",
-  "narration": "ネットで見かけるCookieって一体なに？実は、サイトがあなたのブラウザに保存する小さな情報なんだ。ログイン状態やショッピングカートの内容を覚えるために使われているよ。仕組みを知ると、ネットがぐっと便利になるね。",
+  "title": "マスカラは3か月で替えて！驚きの理由",
+  "topic": "メイク・美容の実用知識",
+  "narration": "毎日使うマスカラ、いつから使っていますか？実は開封後およそ三か月で交換するのが目安なんです。古い化粧品には細菌やカビが繁殖しやすくなります。そのまま使うと目の感染症や肌トラブルの原因になりますよ。",
   "scenes": [
     {
-      "text": "ネットで見かけるCookieってなに？",
+      "text": "毎日使うマスカラ、いつから？",
       "start": 0,
       "end": 5,
       "illustration_keywords": [
-        "スマートフォン"
+        "マスカラ"
       ],
-      "visual_note": "画面中央にスマートフォンのイラストを1点配置",
-      "highlight": "Cookie",
+      "visual_note": "中央にマスカラのイラストを1点配置する",
+      "highlight": "いつから",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "ブラウザに保存される小さな情報です",
+      "text": "3か月で交換するのが目安！",
       "start": 5,
       "end": 10,
       "illustration_keywords": [
-        "パソコン"
+        "カレンダー"
       ],
-      "visual_note": "画面中央にパソコンのイラストを1点配置",
-      "highlight": "小さな情報",
+      "visual_note": "中央にカレンダーのイラストを1点配置する",
+      "highlight": "3か月",
       "motion": "わずかに左右に揺れる"
     },
     {
-      "text": "ログインやカートの内容を覚えます",
+      "text": "古い化粧品は細菌やカビが繁殖",
       "start": 10,
       "end": 15,
       "illustration_keywords": [
-        "買い物かご"
+        "化粧品"
       ],
-      "visual_note": "画面中央に買い物かごのイラストを1点配置",
-      "highlight": "覚える",
-      "motion": "ゆっくり拡大"
+      "visual_note": "中央に化粧品セットのイラストを1点配置する",
+      "highlight": "細菌やカビ",
+      "motion": "ゆっくりズームイン"
     },
     {
-      "text": "仕組みを知るとネットが便利に！",
+      "text": "目の感染症や肌トラブルの原因に",
       "start": 15,
       "end": 20,
       "illustration_keywords": [
-        "虫眼鏡"
+        "目薬"
       ],
-      "visual_note": "画面中央に虫眼鏡のイラストを1点配置",
-      "highlight": "便利",
-      "motion": "わずかに上下に動く"
+      "visual_note": "中央に目薬のイラストを1点配置する",
+      "highlight": "肌トラブル",
+      "motion": "ゆっくり縮小"
     }
   ],
   "sources": [
     {
-      "title": "Google Chrome Help: Clear, enable, and manage cookies in Chrome",
-      "url": "https://support.google.com/chrome/answer/95647"
+      "title": "American Academy of Dermatology: When to toss your makeup and sunscreen",
+      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/replace-makeup-sunscreen"
     }
   ]
 }
