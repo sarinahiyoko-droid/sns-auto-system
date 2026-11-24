@@ -1,57 +1,57 @@
 {
-  "title": "マスカラは3か月で替えて！驚きの理由",
+  "title": "ニキビ肌のファンデ選び",
   "topic": "メイク・美容の実用知識",
-  "narration": "毎日使うマスカラ、いつから使っていますか？実は開封後およそ三か月で交換するのが目安なんです。古い化粧品には細菌やカビが繁殖しやすくなります。そのまま使うと目の感染症や肌トラブルの原因になりますよ。",
+  "narration": "ニキビが気になるけどメイクしたい。どんなファンデが正解なの？実は、毛穴を詰まらせにくい表示があるものを選ぶといいんだ。米国皮膚科学会も、オイルフリーやノンコメドジェニックの製品を勧めているよ。ただし、人によって肌に合うものは違うから注意してね。",
   "scenes": [
     {
-      "text": "毎日使うマスカラ、いつから？",
+      "text": "ニキビが気になるけどメイクしたい",
       "start": 0,
       "end": 5,
       "illustration_keywords": [
-        "マスカラ"
+        "化粧品"
       ],
-      "visual_note": "中央にマスカラのイラストを1点配置する",
-      "highlight": "いつから",
+      "visual_note": "中央に化粧品のイラストを配置する",
+      "highlight": "メイク",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "3か月で交換するのが目安！",
+      "text": "どんなファンデが正解なの？",
       "start": 5,
       "end": 10,
       "illustration_keywords": [
-        "カレンダー"
+        "鏡"
       ],
-      "visual_note": "中央にカレンダーのイラストを1点配置する",
-      "highlight": "3か月",
-      "motion": "わずかに左右に揺れる"
+      "visual_note": "中央に手鏡のイラストを配置する",
+      "highlight": "ファンデ",
+      "motion": "ゆっくり拡大"
     },
     {
-      "text": "古い化粧品は細菌やカビが繁殖",
+      "text": "オイルフリーやノンコメドジェニックを選ぼう",
       "start": 10,
       "end": 15,
       "illustration_keywords": [
-        "化粧品"
+        "化粧ブラシ"
       ],
-      "visual_note": "中央に化粧品セットのイラストを1点配置する",
-      "highlight": "細菌やカビ",
-      "motion": "ゆっくりズームイン"
+      "visual_note": "中央に化粧ブラシのイラストを配置する",
+      "highlight": "ノンコメドジェニック",
+      "motion": "ゆっくり拡大"
     },
     {
-      "text": "目の感染症や肌トラブルの原因に",
+      "text": "肌に合うものは人によって違うよ",
       "start": 15,
       "end": 20,
       "illustration_keywords": [
-        "目薬"
+        "口紅"
       ],
-      "visual_note": "中央に目薬のイラストを1点配置する",
-      "highlight": "肌トラブル",
-      "motion": "ゆっくり縮小"
+      "visual_note": "中央に口紅のイラストを配置する",
+      "highlight": "違うよ",
+      "motion": "ゆっくり拡大"
     }
   ],
   "sources": [
     {
-      "title": "American Academy of Dermatology: When to toss your makeup and sunscreen",
-      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/replace-makeup-sunscreen"
+      "title": "American Academy of Dermatology: I have acne! Is it okay to wear makeup?",
+      "url": "https://www.aad.org/public/diseases/acne/causes/makeup"
     }
   ]
 }
