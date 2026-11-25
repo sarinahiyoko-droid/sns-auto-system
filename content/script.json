@@ -1,57 +1,57 @@
 {
-  "title": "ニキビ肌のファンデ選び",
-  "topic": "メイク・美容の実用知識",
-  "narration": "ニキビが気になるけどメイクしたい。どんなファンデが正解なの？実は、毛穴を詰まらせにくい表示があるものを選ぶといいんだ。米国皮膚科学会も、オイルフリーやノンコメドジェニックの製品を勧めているよ。ただし、人によって肌に合うものは違うから注意してね。",
+  "title": "メイクしたまま寝るとどうなる？",
+  "topic": "メイクをしたまま寝るとどうなる？",
+  "narration": "メイクしたまま寝ていませんか？実はそれ、肌荒れの原因になります。皮膚科の学会でも、就寝前のメイク落としが推奨されています。毛穴が詰まりニキビにつながるため、寝る前に必ず落としましょう。",
   "scenes": [
     {
-      "text": "ニキビが気になるけどメイクしたい",
+      "text": "メイクしたまま寝ていませんか？",
       "start": 0,
       "end": 5,
       "illustration_keywords": [
         "化粧品"
       ],
-      "visual_note": "中央に化粧品のイラストを配置する",
+      "visual_note": "化粧品のイラスト",
       "highlight": "メイク",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "どんなファンデが正解なの？",
+      "text": "実はそれ、肌荒れの原因に！",
       "start": 5,
       "end": 10,
       "illustration_keywords": [
         "鏡"
       ],
-      "visual_note": "中央に手鏡のイラストを配置する",
-      "highlight": "ファンデ",
+      "visual_note": "鏡を見る女性のイラスト",
+      "highlight": "肌荒れ",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "オイルフリーやノンコメドジェニックを選ぼう",
+      "text": "皮膚科の学会でも落とすよう推奨",
       "start": 10,
       "end": 15,
       "illustration_keywords": [
         "化粧ブラシ"
       ],
-      "visual_note": "中央に化粧ブラシのイラストを配置する",
-      "highlight": "ノンコメドジェニック",
+      "visual_note": "化粧ブラシのイラスト",
+      "highlight": "推奨",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "肌に合うものは人によって違うよ",
+      "text": "毛穴が詰まりニキビにつながる",
       "start": 15,
       "end": 20,
       "illustration_keywords": [
         "口紅"
       ],
-      "visual_note": "中央に口紅のイラストを配置する",
-      "highlight": "違うよ",
+      "visual_note": "口紅のイラスト",
+      "highlight": "ニキビ",
       "motion": "ゆっくり拡大"
     }
   ],
   "sources": [
     {
-      "title": "American Academy of Dermatology: I have acne! Is it okay to wear makeup?",
-      "url": "https://www.aad.org/public/diseases/acne/causes/makeup"
+      "title": "American Academy of Dermatology: 10 skin care habits that can worsen acne",
+      "url": "https://www.aad.org/public/diseases/acne/skin-care/habits-stop"
     }
   ]
 }
