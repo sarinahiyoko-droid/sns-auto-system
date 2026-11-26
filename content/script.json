@@ -1,57 +1,57 @@
 {
-  "title": "メイクしたまま寝るとどうなる？",
-  "topic": "メイクをしたまま寝るとどうなる？",
-  "narration": "メイクしたまま寝ていませんか？実はそれ、肌荒れの原因になります。皮膚科の学会でも、就寝前のメイク落としが推奨されています。毛穴が詰まりニキビにつながるため、寝る前に必ず落としましょう。",
+  "title": "メイクスポンジは使うたびに洗うべき？",
+  "topic": "メイクスポンジの正しい洗い方と肌トラブル予防",
+  "narration": "メイクスポンジって、使うたびに洗ってますか？実はそのまま放置すると、大変なことになるんです。スポンジには皮脂や汚れがたまりやすく、肌荒れの原因になります。だから米国皮膚科学会も、使用後に洗うよう勧めているんです。",
   "scenes": [
     {
-      "text": "メイクしたまま寝ていませんか？",
+      "text": "毎回洗ってる？",
       "start": 0,
       "end": 5,
       "illustration_keywords": [
-        "化粧品"
+        "メイクスポンジ"
       ],
-      "visual_note": "化粧品のイラスト",
-      "highlight": "メイク",
+      "visual_note": "中央にメイクスポンジのイラスト",
+      "highlight": "毎回洗ってる",
       "motion": "ゆっくり拡大"
     },
     {
-      "text": "実はそれ、肌荒れの原因に！",
+      "text": "放置は危険！",
       "start": 5,
       "end": 10,
       "illustration_keywords": [
-        "鏡"
+        "化粧品"
       ],
-      "visual_note": "鏡を見る女性のイラスト",
-      "highlight": "肌荒れ",
-      "motion": "ゆっくり拡大"
+      "visual_note": "中央にファンデーションとパフのイラスト",
+      "highlight": "危険",
+      "motion": "少し右に傾ける"
     },
     {
-      "text": "皮膚科の学会でも落とすよう推奨",
+      "text": "皮脂と汚れが原因",
       "start": 10,
       "end": 15,
       "illustration_keywords": [
-        "化粧ブラシ"
+        "汚れ"
       ],
-      "visual_note": "化粧ブラシのイラスト",
-      "highlight": "推奨",
-      "motion": "ゆっくり拡大"
+      "visual_note": "中央に汚れたスポンジのイラスト",
+      "highlight": "汚れ",
+      "motion": "ゆっくり縮小"
     },
     {
-      "text": "毛穴が詰まりニキビにつながる",
+      "text": "学会も毎回洗いを推奨",
       "start": 15,
       "end": 20,
       "illustration_keywords": [
-        "口紅"
+        "鏡"
       ],
-      "visual_note": "口紅のイラスト",
-      "highlight": "ニキビ",
+      "visual_note": "中央に手鏡のイラスト",
+      "highlight": "推奨",
       "motion": "ゆっくり拡大"
     }
   ],
   "sources": [
     {
-      "title": "American Academy of Dermatology: 10 skin care habits that can worsen acne",
-      "url": "https://www.aad.org/public/diseases/acne/skin-care/habits-stop"
+      "title": "American Academy of Dermatology: When to toss your makeup and sunscreen",
+      "url": "https://www.aad.org/public/everyday-care/skin-care-secrets/prevent-skin-problems/replace-makeup-sunscreen"
     }
   ]
 }
